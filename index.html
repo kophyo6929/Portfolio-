@@ -28,11 +28,19 @@
                 <li><a href="#" data-page="portfolio" data-text="header.nav_portfolio"></a></li>
                 <li><a href="#" data-page="contact" data-text="header.nav_contact"></a></li>
             </ul>
-            <button class="hamburger" id="hamburger-menu" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+             <div class="controls-container">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="theme-toggle" aria-label="Toggle dark mode">
+                        <input type="checkbox" id="theme-toggle" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <button class="hamburger" id="hamburger-menu" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -94,42 +102,19 @@
             <div class="container animate-in">
                 <h2 data-text="contact_page.title"></h2>
                 <p data-text="contact_page.description"></p>
-                
-                <form id="contact-form" class="contact-form">
-                    <div class="form-group">
-                        <label for="name" data-text="contact_page.form.name_label"></label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" data-text="contact_page.form.email_label"></label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" data-text="contact_page.form.message_label"></label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" data-text="contact_page.form.submit_button"></button>
-                    <p id="form-success-message" class="form-status-message" role="status"></p>
-                </form>
 
                  <div class="socials">
                     <a href="#" id="contact-telegram" class="social-icon" aria-label="Telegram Profile" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.57c-.28 1.13-1.04 1.4-1.74.88l-4.98-3.6-2.32 2.23c-.25.24-.46.44-.8.44z"></path></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.8,3.2c-0.4-0.4-1-0.5-1.5-0.1L3.5,10.9c-0.5,0.2-0.8,0.7-0.8,1.2s0.3,1,0.8,1.2l4.2,1.7l1.7,4.2c0.2,0.5,0.7,0.8,1.2,0.8c0,0,0,0,0,0c0.5,0,1-0.3,1.2-0.8L21.9,4.7C22.3,4.2,22.2,3.6,21.8,3.2z M17.6,7.1L10,14.7l-2.8-1.1L17.6,7.1z M7.1,17.6l-1.1-2.8l7.6-7.6L17.6,7.1L7.1,17.6z"></path></svg>
                     </a>
                     <a href="#" id="contact-facebook" class="social-icon" aria-label="Facebook Profile" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3v9h4v-9z"></path></svg>
-                    </a>
-                    <a href="#" id="contact-messenger" class="social-icon" aria-label="Messenger Profile" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.03 0 3.92-.61 5.5-1.69l3.43 1.62c.5.24 1.07-.24 1.07-.81v-3.28c1.35-1.58 2.24-3.51 2.4-5.63A10.03 10.03 0 0 0 12 2zm1.61 11.83l-2.5-2.5L8.25 14.2c-.39.39-1.02.39-1.41 0s-.39-1.02 0-1.41l2.86-2.86c.39-.39 1.03-.39 1.42 0l2.5 2.5 2.86-2.87c.39-.39 1.02-.39 1.41 0s.39 1.02 0 1.41l-2.86 2.86z"></path></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22,12c0-5.5-4.5-10-10-10S2,6.5,2,12c0,5,3.7,9.1,8.4,9.9v-7H7.9V12h2.5V9.8c0-2.5,1.5-3.9,3.8-3.9c1.1,0,2.2,0.2,2.2,0.2v2.5h-1.3c-1.2,0-1.6,0.8-1.6,1.6V12h2.8l-0.4,2.9h-2.3v7C18.3,21.1,22,17,22,12z"></path></svg>
                     </a>
                      <a href="#" id="contact-youtube" class="social-icon" aria-label="YouTube Channel" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25 1.09-.83 1.8-1.6 2.3-.78.5-1.94.7-3.46.7h-2.1c-1.55 0-2.69-.2-3.47-.7-.77-.5-1.35-1.21-1.6-2.3C9.16 15.8 9 14.19 9 12s.16-3.8.44-4.83c.25-1.09.83-1.8 1.6-2.3.78-.5 1.92-.7 3.47-.7h2.1c1.52 0 2.68.2 3.46.7.77.5 1.35 1.21 1.6 2.3z"></path></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6,7.8c-0.2-0.8-0.8-1.4-1.6-1.6C18.2,5.8,12,5.8,12,5.8s-6.2,0-8,0.4C3.2,6.4,2.6,7,2.4,7.8C2,9.6,2,12,2,12s0,2.4,0.4,4.2c0.2,0.8,0.8,1.4,1.6,1.6C5.8,18.2,12,18.2,12,18.2s6.2,0,8-0.4c0.8-0.2,1.4-0.8,1.6-1.6c0.4-1.8,0.4-4.2,0.4-4.2S22,9.6,21.6,7.8z M9.7,14.3V9.7l4.4,2.3L9.7,14.3z"></path></svg>
                     </a>
                      <a href="#" id="contact-tiktok" class="social-icon" aria-label="TikTok Profile" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82h2.75v10.45c0 3.1-2.5 5.6-5.6 5.6s-5.6-2.5-5.6-5.6c0-2.3 1.4-4.3 3.5-5.1V7.4c-3.5 1-6.2 4.1-6.2 7.9c0 4.5 3.7 8.2 8.2 8.2s8.2-3.7 8.2-8.2V5.82zM12.5 0h2.8v10.3c0 .3-.2.5-.5.5s-.5-.2-.5-.5V0z"></path></svg>
-                    </a>
-                    <a href="#" id="contact-telegram-channel" class="social-icon" aria-label="Telegram Channel" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-2 0a2 2 0 1 0-4 0 2 2 0 0 0 4 0zM5 20a1 1 0 0 1-1-1v-4a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1zm14 0a1 1 0 0 1-1-1v-4a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1zM9.6 2.6a1 1 0 0 1 .8.4l3.2 4.8H18a1 1 0 0 1 0 2h-4.4a1 1 0 0 1-.8-.4L9.6 4.6H6a1 1 0 0 1 0-2h3.6z"></path></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.8h2.8v10.5c0,3.1-2.5,5.6-5.6,5.6s-5.6-2.5-5.6-5.6C8.2,9.9,9.6,8,11.7,7.2V9.5C9.4,10.2,8,12.4,8,15.1c0,3.8,3.1,6.9,6.9,6.9s6.9-3.1,6.9-6.9V5.8h-2.8V5.8z M12.5,0h2.8v10.3c0,0.3-0.2,0.5-0.5,0.5s-0.5-0.2-0.5-0.5V0z"></path></svg>
                     </a>
                  </div>
             </div>

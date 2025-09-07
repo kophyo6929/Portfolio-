@@ -25,9 +25,9 @@ const embeddedTextContent = {
     "subtitle": "Creating powerful, intelligent, and seamless bots to automate your business and engage your audience.",
     "cta": "Explore Services",
     "meta": {
-      "title": "Expert Telegram Bot Developer | BotDev Pro",
-      "description": "Top-rated Telegram bot developer specializing in custom bots for business automation, e-commerce, and user engagement. Get a free quote for your project.",
-      "keywords": "Telegram bot developer, custom Telegram bots, bot development, BotDev Pro, Python bot, Node.js bot, aiogram developer, telegraf developer, hire bot developer"
+      "title": "Expert Telegram Bot Developer | Custom Automation & API Integration",
+      "description": "Hire a top-rated Telegram bot developer specializing in custom bots for business automation, e-commerce, and API integration. Get a free quote for your project.",
+      "keywords": "Telegram bot developer, custom Telegram bots, hire bot developer, Python aiogram, Node.js Telegraf, bot development services, Telegram automation, API integration"
     }
   },
   "about_page": {
@@ -45,25 +45,25 @@ const embeddedTextContent = {
     ],
     "testimonials_title": "What My Clients Say",
     "meta": {
-      "title": "About Me & Skills | Professional Telegram Developer",
-      "description": "Learn about my 5+ years of experience as a professional Telegram Bot developer. My skills include Python (aiogram), Node.js (Telegraf), API integration, and database design.",
-      "keywords": "about telegram developer, skills, telegram bot expert, aiogram, telegraf.js, API integration, python, node.js, bot developer portfolio"
+      "title": "About Me | Experienced Telegram Bot Developer",
+      "description": "With 5+ years of experience, I build high-performance Telegram bots using Python (aiogram) and Node.js (Telegraf). Discover my skills in API integration, database design, and bot deployment.",
+      "keywords": "telegram bot expert, aiogram developer, telegraf.js expert, python bot developer, node.js bot developer, bot developer skills, developer portfolio"
     }
   },
   "services_page": {
     "title": "My Services",
     "meta": {
-      "title": "Telegram Bot Development Services | BotDev Pro",
-      "description": "Explore a full range of Telegram bot services: custom bot building, bot rentals, managed hosting, and account trading bots. Get a tailored solution for your business.",
-      "keywords": "telegram bot services, custom bot building, telegram bot rental, telegram bot hosting, e-commerce bot, subscription bot, telegram automation"
+      "title": "Telegram Bot Development Services | Custom Builds, Hosting & Rentals",
+      "description": "Full-range Telegram bot services: custom bot development from scratch, reliable bot hosting, and affordable bot rentals. Let's build a solution to automate and grow your business.",
+      "keywords": "telegram bot services, custom bot development, telegram bot hosting, rent telegram bot, e-commerce bot, subscription bot, telegram automation solutions"
     }
   },
   "portfolio_page": {
     "title": "My Work",
     "meta": {
-      "title": "Telegram Bot Portfolio | BotDev Pro",
-      "description": "Browse my portfolio of custom Telegram bots, including advanced e-commerce bots, automated support desk bots, and content subscription management systems.",
-      "keywords": "telegram bot portfolio, bot examples, e-commerce bot telegram, support bot, subscription bot, bot development work, botdev pro projects"
+      "title": "My Work | Telegram Bot Development Portfolio",
+      "description": "Explore my portfolio of custom Telegram bots, featuring advanced e-commerce solutions, automated support systems, and content subscription bots. See my development expertise in action.",
+      "keywords": "telegram bot portfolio, bot development examples, e-commerce telegram bot, customer support bot, subscription bot project, bot developer work, botdev pro projects"
     }
   },
   "contact_page": {
@@ -77,9 +77,9 @@ const embeddedTextContent = {
       "success_message": "Thank you! Your message has been sent successfully."
     },
     "meta": {
-      "title": "Contact a Telegram Developer | BotDev Pro",
-      "description": "Get in touch to discuss your Telegram bot project. I'm available for new projects and collaborations. Let's build your bot together.",
-      "keywords": "contact telegram developer, hire bot developer, project inquiry, botdev pro contact, get a quote, telegram bot consultation"
+      "title": "Contact | Hire a Freelance Telegram Bot Developer",
+      "description": "Ready to start your Telegram bot project? Contact me for a free consultation and quote. I'm available for new freelance projects and collaborations.",
+      "keywords": "contact telegram developer, hire telegram bot developer, freelance bot developer, bot project quote, telegram bot consultation, get in touch"
     }
   },
   "footer": {
@@ -170,7 +170,7 @@ const embeddedServicesContent = [
       "Customer account management",
       "Automated billing reminders and support"
     ],
-    "bot_link": null
+    "bot_link": "#"
   },
   {
     "id": "language",
@@ -192,17 +192,20 @@ const embeddedPortfolioContent = [
   {
     "title": "E-commerce Bot",
     "description": "A complete shopping bot with product catalog, cart, and Stripe integration.",
-    "link": "#"
+    "link": "#",
+    "image": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80&w=1000"
   },
   {
     "title": "Support Desk Bot",
     "description": "Automates customer support by creating tickets and answering common questions.",
-    "link": "#"
+    "link": "#",
+    "image": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=1000"
   },
   {
     "title": "Content Subscription Bot",
     "description": "Manages paid subscriptions for exclusive content in a private channel.",
-    "link": "#"
+    "link": "#",
+    "image": "https://images.unsplash.com/photo-1585224328157-2db5f286b845?auto=format&fit=crop&q=80&w=1000"
   }
 ];
 
@@ -210,10 +213,8 @@ const embeddedContactContent = {
   "email": "hello@botdevpro.com",
   "telegram": "#",
   "facebook": "#",
-  "messenger": "#",
   "youtube": "#",
-  "tiktok": "#",
-  "telegram_channel": "#"
+  "tiktok": "#"
 };
 
 const embeddedTestimonialsContent = [
@@ -241,9 +242,32 @@ let allPortfolioContent: any[];
 let allContactContent: any;
 let allTestimonialsContent: any[];
 
+// --- Global Animation Observer ---
+let animationObserver: IntersectionObserver | null = null;
+
+
 // --- App Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
     try {
+        // Setup the Intersection Observer for scroll animations
+        animationObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+        
+        // Observe static elements that need animation
+        document.querySelectorAll('.animate-in').forEach(el => {
+            if (animationObserver) {
+                animationObserver.observe(el);
+            }
+        });
+        
         // Load content from the embedded objects instead of fetching JSON files
         allTextContent = embeddedTextContent;
         allServicesContent = embeddedServicesContent;
@@ -258,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Set up navigation and interactivity
         setupAppNavigation();
         setupBackToTopButton();
-        setupContactForm();
+        setupThemeToggle();
 
     } catch (error) {
         console.error("Failed to load website content:", error);
@@ -321,15 +345,21 @@ function populateHeader(headerContent: any) {
 function populateAboutPage(aboutContent: { skills: string[] }, testimonialsContent: any[]) {
     const skillsGrid = document.querySelector('#page-about .skills-grid');
     if (skillsGrid && aboutContent.skills) {
-        skillsGrid.innerHTML = aboutContent.skills.map(skill =>
-            `<div class="skill-card">${skill}</div>`
+        skillsGrid.innerHTML = aboutContent.skills.map((skill, index) =>
+            `<div class="skill-card" style="--anim-order: ${index};">${skill}</div>`
         ).join('');
+
+        if (animationObserver) {
+            skillsGrid.querySelectorAll('.skill-card').forEach(card => {
+                animationObserver.observe(card);
+            });
+        }
     }
 
     const testimonialsGrid = document.querySelector('.testimonials-grid');
     if (testimonialsGrid && testimonialsContent) {
-        testimonialsGrid.innerHTML = testimonialsContent.map(testimonial => `
-            <div class="testimonial-card">
+        testimonialsGrid.innerHTML = testimonialsContent.map((testimonial, index) => `
+            <div class="testimonial-card" style="--anim-order: ${index};">
                 <blockquote>${testimonial.quote}</blockquote>
                 <footer>
                     ${testimonial.name}
@@ -337,6 +367,12 @@ function populateAboutPage(aboutContent: { skills: string[] }, testimonialsConte
                 </footer>
             </div>
         `).join('');
+
+        if (animationObserver) {
+            testimonialsGrid.querySelectorAll('.testimonial-card').forEach(card => {
+                animationObserver.observe(card);
+            });
+        }
     }
 }
 
@@ -374,7 +410,7 @@ function populateServicesPage() {
 }
 
 /**
- * Displays the details for a specific service.
+ * Displays the details for a specific service in separate animated cards.
  * @param serviceId The ID of the service to display.
  */
 function displayServiceDetails(serviceId: string) {
@@ -386,33 +422,73 @@ function displayServiceDetails(serviceId: string) {
     document.querySelectorAll('.service-nav-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-service-id') === serviceId);
     });
+    
+    let animOrder = 0;
+    let detailsHtml = '';
 
-    // Generate the HTML for the service details
-    contentDisplay.innerHTML = `
-        <div class="service-content">
+    // Card 1: Title & Description
+    detailsHtml += `
+        <div class="service-card anim-slide-left" style="--anim-order: ${animOrder++};">
             <h3>${service.title}</h3>
-            <p class="service-price">${service.price}</p>
             <p>${service.description}</p>
-            
-            ${service.features && service.features.length > 0 ? `
+        </div>
+    `;
+
+    // Card 2: Price
+    detailsHtml += `
+        <div class="service-card anim-slide-right" style="--anim-order: ${animOrder++};">
+            <h4>Price</h4>
+            <p class="service-price">${service.price}</p>
+        </div>
+    `;
+
+    // Card 3: Features
+    if (service.features && service.features.length > 0) {
+        detailsHtml += `
+            <div class="service-card anim-slide-left" style="--anim-order: ${animOrder++};">
                 <h4>Features</h4>
                 <ul>
                     ${service.features.map((feature: string) => `<li>${feature}</li>`).join('')}
                 </ul>
-            ` : ''}
+            </div>
+        `;
+    }
 
-            ${service.instructions ? `
+    // Card 4: How It Works
+    if (service.instructions) {
+        detailsHtml += `
+            <div class="service-card anim-slide-right" style="--anim-order: ${animOrder++};">
                 <h4>How It Works</h4>
                 <p>${service.instructions}</p>
-            ` : ''}
+            </div>
+        `;
+    }
+    
+    // Card 5: Actions
+    const botLinkHtml = service.bot_link 
+        ? `<a href="${service.bot_link}" class="btn" target="_blank" rel="noopener noreferrer">View Bot</a>` 
+        : '';
 
-            <div class="service-actions">
-                ${service.bot_link ? `<a href="${service.bot_link}" class="btn" target="_blank" rel="noopener noreferrer">View Bot</a>` : ''}
+    detailsHtml += `
+        <div class="service-card service-actions-card anim-slide-left" style="--anim-order: ${animOrder++};">
+             <div class="service-actions">
+                ${botLinkHtml}
                 <a href="${allContactContent.telegram}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Contact Admin</a>
             </div>
         </div>
     `;
+    
+    // Generate the HTML for the service details
+    contentDisplay.innerHTML = `<div class="service-details-container">${detailsHtml}</div>`;
+
+    // Observe the newly created cards for animation
+    if (animationObserver) {
+        contentDisplay.querySelectorAll('.service-card').forEach(card => {
+            animationObserver.observe(card);
+        });
+    }
 }
+
 
 /**
  * Populates the Portfolio page grid.
@@ -422,11 +498,21 @@ function populatePortfolioPage(portfolioItems: any[]) {
     if (portfolioGrid) {
         portfolioGrid.innerHTML = portfolioItems.map(item => `
             <div class="portfolio-card">
-                <h3>${item.title}</h3>
-                <p>${item.description}</p>
-                <a href="${item.link}" class="btn-link" target="_blank" rel="noopener noreferrer">View on Telegram</a>
+                <img src="${item.image}" alt="${item.title}" class="portfolio-image" loading="lazy">
+                <div class="portfolio-card-content">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <a href="${item.link}" class="btn-link" target="_blank" rel="noopener noreferrer">View on Telegram</a>
+                </div>
             </div>
         `).join('');
+        
+        // Observe the newly created cards for animation
+        if (animationObserver) {
+            portfolioGrid.querySelectorAll('.portfolio-card').forEach(card => {
+                animationObserver.observe(card);
+            });
+        }
     }
 }
 
@@ -437,10 +523,8 @@ function populateContactPage(contactInfo: any) {
     const links = {
         'contact-telegram': contactInfo.telegram,
         'contact-facebook': contactInfo.facebook,
-        'contact-messenger': contactInfo.messenger,
         'contact-youtube': contactInfo.youtube,
         'contact-tiktok': contactInfo.tiktok,
-        'contact-telegram-channel': contactInfo.telegram_channel,
     };
 
     for (const [id, href] of Object.entries(links)) {
@@ -609,74 +693,33 @@ function setupBackToTopButton() {
 }
 
 /**
- * Sets up the contact form, including submission and localStorage logic.
+ * Sets up the dark mode theme toggle functionality.
  */
-function setupContactForm() {
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    const successMessageEl = document.getElementById('form-success-message');
-    if (!form || !successMessageEl) return;
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle') as HTMLInputElement;
+    if (!themeToggle) return;
 
-    const formFields = {
-        name: form.querySelector<HTMLInputElement>('#name'),
-        email: form.querySelector<HTMLInputElement>('#email'),
-        message: form.querySelector<HTMLTextAreaElement>('#message'),
+    const setTheme = (theme: 'light' | 'dark') => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        themeToggle.checked = theme === 'dark';
     };
 
-    const FORM_STORAGE_KEY = 'contactFormData';
+    themeToggle.addEventListener('change', () => {
+        setTheme(themeToggle.checked ? 'dark' : 'light');
+    });
 
-    // Pre-fill form from localStorage on load
-    const savedData = localStorage.getItem(FORM_STORAGE_KEY);
-    if (savedData) {
-        try {
-            const data = JSON.parse(savedData);
-            if(formFields.name) formFields.name.value = data.name || '';
-            if(formFields.email) formFields.email.value = data.email || '';
-            if(formFields.message) formFields.message.value = data.message || '';
-        } catch (e) {
-            console.error("Could not parse saved form data", e);
-            localStorage.removeItem(FORM_STORAGE_KEY);
-        }
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+        setTheme(savedTheme);
+        return;
     }
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = {
-            name: formFields.name?.value || '',
-            email: formFields.email?.value || '',
-            message: formFields.message?.value || '',
-        };
-
-        try {
-            // Placeholder for actual form submission logic
-            // Using a non-existent endpoint to simulate a network error for the 'catch' block
-            const response = await fetch('https://example.com/api/this-will-fail', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-
-            if (!response.ok) {
-                 // This will trigger the catch block for demo purposes
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            // On actual success:
-            successMessageEl.textContent = allTextContent.contact_page.form.success_message;
-            form.reset();
-            localStorage.removeItem(FORM_STORAGE_KEY);
-
-        } catch (error) {
-            console.error("Form submission failed, saving to localStorage.", error);
-            localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
-            // You could display an error message to the user here
-            successMessageEl.textContent = "Submission failed. Your message has been saved in this browser.";
-            successMessageEl.style.color = "var(--text-color)"; // Make it less alarming than red
-        } finally {
-             setTimeout(() => { 
-                successMessageEl.textContent = '';
-                successMessageEl.style.color = "var(--success-color)";
-            }, 5000);
-        }
-    });
+    // If no saved theme, check for user's system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
 }
