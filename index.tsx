@@ -1,3 +1,239 @@
+// --- Embedded Content Store ---
+// By embedding the JSON data directly into the script, we eliminate the need for network requests (fetch)
+// which can fail on some deployment platforms like Vercel if the file paths are not correctly resolved.
+// This makes the app more robust and guarantees the content will always load.
+
+const embeddedTextContent = {
+  "header": {
+    "logo": "BotDev Pro",
+    "nav_home": "Home",
+    "nav_about": "About",
+    "nav_services": "Services",
+    "nav_portfolio": "Portfolio",
+    "nav_contact": "Contact",
+    "services_dropdown": [
+      { "name": "Bot Building", "href": "#building" },
+      { "name": "Bot Rentals", "href": "#renting" },
+      { "name": "Bot Hosting", "href": "#hosting" },
+      { "name": "Account Trading", "href": "#accounts" },
+      { "name": "ISP Store Bots", "href": "#isp-store" },
+      { "name": "Language Bots", "href": "#language" }
+    ]
+  },
+  "home": {
+    "title": "Expert Telegram Bot Developer",
+    "subtitle": "Creating powerful, intelligent, and seamless bots to automate your business and engage your audience.",
+    "cta": "Explore Services",
+    "meta": {
+      "title": "Expert Telegram Bot Developer | BotDev Pro",
+      "description": "Top-rated Telegram bot developer specializing in custom bots for business automation, e-commerce, and user engagement. Get a free quote for your project.",
+      "keywords": "Telegram bot developer, custom Telegram bots, bot development, BotDev Pro, Python bot, Node.js bot, aiogram developer, telegraf developer, hire bot developer"
+    }
+  },
+  "about_page": {
+    "title": "About Me & My Skills",
+    "description": "With over 5 years of experience, I specialize in building custom Telegram bots tailored to your unique needs. From simple notification bots to complex integrated systems with payment gateways and external APIs, I deliver robust and scalable solutions.",
+    "skills": [
+      "Python (aiogram)",
+      "Node.js (Telegraf.js)",
+      "REST & GraphQL APIs",
+      "Database Design (SQL/NoSQL)",
+      "Payment Gateway Integration",
+      "Custom Webhooks",
+      "Bot Hosting & Deployment",
+      "Natural Language Processing"
+    ],
+    "testimonials_title": "What My Clients Say",
+    "meta": {
+      "title": "About Me & Skills | Professional Telegram Developer",
+      "description": "Learn about my 5+ years of experience as a professional Telegram Bot developer. My skills include Python (aiogram), Node.js (Telegraf), API integration, and database design.",
+      "keywords": "about telegram developer, skills, telegram bot expert, aiogram, telegraf.js, API integration, python, node.js, bot developer portfolio"
+    }
+  },
+  "services_page": {
+    "title": "My Services",
+    "meta": {
+      "title": "Telegram Bot Development Services | BotDev Pro",
+      "description": "Explore a full range of Telegram bot services: custom bot building, bot rentals, managed hosting, and account trading bots. Get a tailored solution for your business.",
+      "keywords": "telegram bot services, custom bot building, telegram bot rental, telegram bot hosting, e-commerce bot, subscription bot, telegram automation"
+    }
+  },
+  "portfolio_page": {
+    "title": "My Work",
+    "meta": {
+      "title": "Telegram Bot Portfolio | BotDev Pro",
+      "description": "Browse my portfolio of custom Telegram bots, including advanced e-commerce bots, automated support desk bots, and content subscription management systems.",
+      "keywords": "telegram bot portfolio, bot examples, e-commerce bot telegram, support bot, subscription bot, bot development work, botdev pro projects"
+    }
+  },
+  "contact_page": {
+    "title": "Get In Touch",
+    "description": "Have a project in mind? I'd love to hear about it. Fill out the form below or reach out via my social channels and let's create something amazing.",
+    "form": {
+      "name_label": "Your Name",
+      "email_label": "Your Email",
+      "message_label": "Your Message",
+      "submit_button": "Send Message",
+      "success_message": "Thank you! Your message has been sent successfully."
+    },
+    "meta": {
+      "title": "Contact a Telegram Developer | BotDev Pro",
+      "description": "Get in touch to discuss your Telegram bot project. I'm available for new projects and collaborations. Let's build your bot together.",
+      "keywords": "contact telegram developer, hire bot developer, project inquiry, botdev pro contact, get a quote, telegram bot consultation"
+    }
+  },
+  "footer": {
+    "copyright": "&copy; 2024 BotDev Pro. All Rights Reserved."
+  }
+};
+
+const embeddedServicesContent = [
+  {
+    "id": "building",
+    "title": "Bot Building",
+    "price": "Starts at $250",
+    "description": "From concept to deployment, I create bespoke Telegram bots designed to meet your specific business needs. Whether you need a bot for customer service, e-commerce, content delivery, or process automation, I build reliable and scalable solutions.",
+    "instructions": "Contact me with your project idea. We'll have a consultation to define the scope, features, and timeline. Once agreed, I'll begin development, providing regular updates until the final bot is delivered and deployed.",
+    "features": [
+      "Full workflow mapping & design",
+      "Integration with external APIs and databases",
+      "Custom keyboard layouts and inline commands",
+      "User authentication and management"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "renting",
+    "title": "Bot Rentals",
+    "price": "$50 / month",
+    "description": "Get immediate access to powerful, ready-to-use bots for a low monthly fee. Ideal for businesses that need a proven solution without the upfront development cost. All rental bots include maintenance and support.",
+    "instructions": "Browse my portfolio of available rental bots. Choose the one that fits your needs and contact me to set up your subscription. The bot will be configured for your channel or group within 24 hours.",
+    "features": [
+      "E-commerce & Store Bots",
+      "Subscription & Content Management Bots",
+      "Support & Ticketing Systems",
+      "Affordable monthly subscription plans"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "hosting",
+    "title": "Bot Hosting",
+    "price": "$15 / month per bot",
+    "description": "Ensure your bot is always online and responsive with my managed hosting service. I provide a secure, high-performance environment specifically optimized for Telegram bots, so you can focus on your business, not on server maintenance.",
+    "instructions": "Provide me with your bot's source code or token. I will deploy it on a secure, private server and provide you with logs and a control panel to monitor its status. All maintenance and security updates are handled by me.",
+    "features": [
+      "99.9% Uptime Guarantee",
+      "Secure and scalable infrastructure",
+      "Automated backups and monitoring",
+      "Technical support included"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "selling-bot",
+    "title": "Account Selling Bot",
+    "price": "10% Commission Fee",
+    "description": "A fully automated bot to facilitate the secure selling of Telegram accounts. List your accounts for sale, set your price, and let the bot handle the transaction with a secure escrow service to protect both buyer and seller.",
+    "instructions": "Start a chat with the bot, choose the 'Sell Account' option, and follow the on-screen instructions to list your account. The bot will notify you when a buyer is found and guide you through the secure transfer process.",
+    "features": [
+      "Automated listing process",
+      "Secure escrow system",
+      "Anonymity and privacy protection",
+      "Automatic payment release upon successful transfer"
+    ],
+    "bot_link": "#"
+  },
+   {
+    "id": "receiver-bot",
+    "title": "Account Receiver Bot",
+    "price": "Free to Use",
+    "description": "A utility bot for developers and power users to securely receive and manage Telegram account session files (TData). The bot provides a safe, private, and organized way to handle multiple account authentications.",
+    "instructions": "Start the bot, generate a unique receiving address, and use this address in your account generation scripts. The bot will securely store the session files, allowing you to download them anytime.",
+    "features": [
+      "Secure and private session storage",
+      "One-time receiving addresses",
+      "Organized file management",
+      "Easy download of account data"
+    ],
+    "bot_link": "#"
+  },
+  {
+    "id": "isp-store",
+    "title": "ISP Store Bots",
+    "price": "Contact for Quote",
+    "description": "A specialized e-commerce bot for Internet Service Providers (ISPs). Allow your customers to browse plans, check for service availability, sign up, and pay their bills directly through Telegram, streamlining your sales and support.",
+    "instructions": "This is a custom-built solution. Contact me to discuss your ISP's specific requirements, such as service plans, coverage areas, and payment gateways. I will build a tailored bot for your business.",
+    "features": [
+      "Automated plan browsing and subscription",
+      "Integrated payment gateways",
+      "Customer account management",
+      "Automated billing reminders and support"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "language",
+    "title": "Language Bots",
+    "price": "$10 / month Subscription",
+    "description": "An interactive bot designed to make learning a new language engaging and effective. This bot offers daily lessons, vocabulary quizzes, pronunciation help, and cultural insights, acting as a personal tutor available 24/7.",
+    "instructions": "Find the bot on Telegram, press 'Start', and choose your learning path. The bot will guide you through daily lessons and interactive exercises. Use the /progress command to see how far you've come!",
+    "features": [
+      "Support for multiple languages (e.g. Chinese)",
+      "Interactive quizzes and flashcards",
+      "Pinyin and character practice",
+      "Progress tracking and gamification"
+    ],
+    "bot_link": "#"
+  }
+];
+
+const embeddedPortfolioContent = [
+  {
+    "title": "E-commerce Bot",
+    "description": "A complete shopping bot with product catalog, cart, and Stripe integration.",
+    "link": "#"
+  },
+  {
+    "title": "Support Desk Bot",
+    "description": "Automates customer support by creating tickets and answering common questions.",
+    "link": "#"
+  },
+  {
+    "title": "Content Subscription Bot",
+    "description": "Manages paid subscriptions for exclusive content in a private channel.",
+    "link": "#"
+  }
+];
+
+const embeddedContactContent = {
+  "email": "hello@botdevpro.com",
+  "telegram": "#",
+  "facebook": "#",
+  "messenger": "#",
+  "youtube": "#",
+  "tiktok": "#",
+  "telegram_channel": "#"
+};
+
+const embeddedTestimonialsContent = [
+  {
+    "quote": "The e-commerce bot developed by BotDev Pro has transformed our sales process. It's reliable, fast, and our customers love the convenience. Highly recommended!",
+    "name": "Jane Doe",
+    "company": "CEO, Online Retail Co."
+  },
+  {
+    "quote": "I needed a complex bot with API integrations and a payment gateway. The final product exceeded my expectations. Professional service from start to finish.",
+    "name": "John Smith",
+    "company": "Founder, Tech Startup"
+  },
+  {
+    "quote": "Our support ticket volume has decreased by 40% since implementing the support desk bot. It's an incredible tool that has freed up our team to focus on more complex issues.",
+    "name": "Emily White",
+    "company": "Customer Support Manager"
+  }
+];
+
 // --- Global Content Store ---
 let allTextContent: any;
 let allServicesContent: any[];
@@ -6,23 +242,14 @@ let allContactContent: any;
 let allTestimonialsContent: any[];
 
 // --- App Initialization ---
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     try {
-        // Load all content from JSON files simultaneously
-        const [text, services, portfolio, contact, testimonials] = await Promise.all([
-            fetch('/text.json').then(res => res.json()),
-            fetch('/services.json').then(res => res.json()),
-            fetch('/portfolio.json').then(res => res.json()),
-            fetch('/contact.json').then(res => res.json()),
-            fetch('/testimonials.json').then(res => res.json())
-        ]);
-
-        // Store content in global variables for easy access
-        allTextContent = text;
-        allServicesContent = services;
-        allPortfolioContent = portfolio;
-        allContactContent = contact;
-        allTestimonialsContent = testimonials;
+        // Load content from the embedded objects instead of fetching JSON files
+        allTextContent = embeddedTextContent;
+        allServicesContent = embeddedServicesContent;
+        allPortfolioContent = embeddedPortfolioContent;
+        allContactContent = embeddedContactContent;
+        allTestimonialsContent = embeddedTestimonialsContent;
 
         // Populate the entire application structure
         populateSharedContent();
@@ -35,7 +262,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error("Failed to load website content:", error);
-        document.body.innerHTML = '<p style="text-align: center; padding: 2rem;">Sorry, the content could not be loaded. Please try again later.</p>';
+        document.body.innerHTML = '<p style="text-align: center; padding: 2rem;">Sorry, an unexpected error occurred while displaying the page.</p>';
     }
 });
 
