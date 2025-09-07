@@ -1,0 +1,100 @@
+[
+  {
+    "id": "building",
+    "title": "Bot Building",
+    "price": "Starts at $250",
+    "description": "From concept to deployment, I create bespoke Telegram bots designed to meet your specific business needs. Whether you need a bot for customer service, e-commerce, content delivery, or process automation, I build reliable and scalable solutions.",
+    "instructions": "Contact me with your project idea. We'll have a consultation to define the scope, features, and timeline. Once agreed, I'll begin development, providing regular updates until the final bot is delivered and deployed.",
+    "features": [
+      "Full workflow mapping & design",
+      "Integration with external APIs and databases",
+      "Custom keyboard layouts and inline commands",
+      "User authentication and management"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "renting",
+    "title": "Bot Rentals",
+    "price": "$50 / month",
+    "description": "Get immediate access to powerful, ready-to-use bots for a low monthly fee. Ideal for businesses that need a proven solution without the upfront development cost. All rental bots include maintenance and support.",
+    "instructions": "Browse my portfolio of available rental bots. Choose the one that fits your needs and contact me to set up your subscription. The bot will be configured for your channel or group within 24 hours.",
+    "features": [
+      "E-commerce & Store Bots",
+      "Subscription & Content Management Bots",
+      "Support & Ticketing Systems",
+      "Affordable monthly subscription plans"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "hosting",
+    "title": "Bot Hosting",
+    "price": "$15 / month per bot",
+    "description": "Ensure your bot is always online and responsive with my managed hosting service. I provide a secure, high-performance environment specifically optimized for Telegram bots, so you can focus on your business, not on server maintenance.",
+    "instructions": "Provide me with your bot's source code or token. I will deploy it on a secure, private server and provide you with logs and a control panel to monitor its status. All maintenance and security updates are handled by me.",
+    "features": [
+      "99.9% Uptime Guarantee",
+      "Secure and scalable infrastructure",
+      "Automated backups and monitoring",
+      "Technical support included"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "selling-bot",
+    "title": "Account Selling Bot",
+    "price": "10% Commission Fee",
+    "description": "A fully automated bot to facilitate the secure selling of Telegram accounts. List your accounts for sale, set your price, and let the bot handle the transaction with a secure escrow service to protect both buyer and seller.",
+    "instructions": "Start a chat with the bot, choose the 'Sell Account' option, and follow the on-screen instructions to list your account. The bot will notify you when a buyer is found and guide you through the secure transfer process.",
+    "features": [
+      "Automated listing process",
+      "Secure escrow system",
+      "Anonymity and privacy protection",
+      "Automatic payment release upon successful transfer"
+    ],
+    "bot_link": "#"
+  },
+   {
+    "id": "receiver-bot",
+    "title": "Account Receiver Bot",
+    "price": "Free to Use",
+    "description": "A utility bot for developers and power users to securely receive and manage Telegram account session files (TData). The bot provides a safe, private, and organized way to handle multiple account authentications.",
+    "instructions": "Start the bot, generate a unique receiving address, and use this address in your account generation scripts. The bot will securely store the session files, allowing you to download them anytime.",
+    "features": [
+      "Secure and private session storage",
+      "One-time receiving addresses",
+      "Organized file management",
+      "Easy download of account data"
+    ],
+    "bot_link": "#"
+  },
+  {
+    "id": "isp-store",
+    "title": "ISP Store Bots",
+    "price": "Contact for Quote",
+    "description": "A specialized e-commerce bot for Internet Service Providers (ISPs). Allow your customers to browse plans, check for service availability, sign up, and pay their bills directly through Telegram, streamlining your sales and support.",
+    "instructions": "This is a custom-built solution. Contact me to discuss your ISP's specific requirements, such as service plans, coverage areas, and payment gateways. I will build a tailored bot for your business.",
+    "features": [
+      "Automated plan browsing and subscription",
+      "Integrated payment gateways",
+      "Customer account management",
+      "Automated billing reminders and support"
+    ],
+    "bot_link": null
+  },
+  {
+    "id": "language",
+    "title": "Language Bots",
+    "price": "$10 / month Subscription",
+    "description": "An interactive bot designed to make learning a new language engaging and effective. This bot offers daily lessons, vocabulary quizzes, pronunciation help, and cultural insights, acting as a personal tutor available 24/7.",
+    "instructions": "Find the bot on Telegram, press 'Start', and choose your learning path. The bot will guide you through daily lessons and interactive exercises. Use the /progress command to see how far you've come!",
+    "features": [
+      "Support for multiple languages (e.g. Chinese)",
+      "Interactive quizzes and flashcards",
+      "Pinyin and character practice",
+      "Progress tracking and gamification"
+    ],
+    "bot_link": "#"
+  }
+]

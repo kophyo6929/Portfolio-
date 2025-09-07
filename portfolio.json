@@ -1,0 +1,17 @@
+[
+  {
+    "title": "E-commerce Bot",
+    "description": "A complete shopping bot with product catalog, cart, and Stripe integration.",
+    "link": "#"
+  },
+  {
+    "title": "Support Desk Bot",
+    "description": "Automates customer support by creating tickets and answering common questions.",
+    "link": "#"
+  },
+  {
+    "title": "Content Subscription Bot",
+    "description": "Manages paid subscriptions for exclusive content in a private channel.",
+    "link": "#"
+  }
+]

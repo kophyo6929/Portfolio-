@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bot Services | BotDev Pro</title>
+    <meta name="description" id="meta-description" content="Explore my services: custom bot building, bot rentals, managed hosting, and more. Get a tailored Telegram bot solution for your business.">
+    <meta name="keywords" id="meta-keywords" content="telegram bot services, bot building, bot rental, bot hosting, custom bots, telegram accounts">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body id="page-services">
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <a href="./index.html" class="logo" aria-label="Homepage" data-text="header.logo"></a>
+            <ul class="nav-links">
+                <li><a href="./index.html" data-text="header.nav_home"></a></li>
+                <li><a href="./about.html" data-text="header.nav_about"></a></li>
+                <li class="nav-item dropdown">
+                    <a href="./services.html" data-text="header.nav_services" class="dropdown-toggle"></a>
+                    <ul class="dropdown-menu">
+                        <!-- Dropdown items will be populated by JS -->
+                    </ul>
+                </li>
+                <li><a href="./portfolio.html" data-text="header.nav_portfolio"></a></li>
+                <li><a href="./contact.html" data-text="header.nav_contact"></a></li>
+            </ul>
+            <button class="hamburger" id="hamburger-menu" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="services" class="services-section content-section">
+             <div class="container animate-in">
+                <h2 data-text="services_page.title"></h2>
+                <div class="services-list">
+                    <!-- Services will be loaded here from JSON -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer-bottom">
+        <p data-text="footer.copyright"></p>
+    </footer>
+
+    <script type="module" src="./index.tsx"></script>
+</body>
+</html>
