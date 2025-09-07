@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Load all content from JSON files simultaneously
         const [text, services, portfolio, contact, testimonials] = await Promise.all([
-            fetch('./text.json').then(res => res.json()),
-            fetch('./services.json').then(res => res.json()),
-            fetch('./portfolio.json').then(res => res.json()),
-            fetch('./contact.json').then(res => res.json()),
-            fetch('./testimonials.json').then(res => res.json())
+            fetch('/text.json').then(res => res.json()),
+            fetch('/services.json').then(res => res.json()),
+            fetch('/portfolio.json').then(res => res.json()),
+            fetch('/contact.json').then(res => res.json()),
+            fetch('/testimonials.json').then(res => res.json())
         ]);
 
         // Store content in global variables for easy access
