@@ -1,4 +1,5 @@
 
+
 import { GoogleGenAI, Chat } from "@google/genai";
 
 // --- Import JSON data directly ---
@@ -625,11 +626,12 @@ function setupChatbot() {
     
     // Initialize the Gemini Chat
     try {
-        // Safely access the API key, checking if `process` exists first.
-        const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : undefined;
+        // FIX: The API key must be retrieved from `process.env.API_KEY` as per the coding guidelines. The use of `import.meta.env` is incorrect.
+        // Access the API key from environment variables.
+        const apiKey = process.env.API_KEY;
 
         if (!apiKey) {
-            throw new Error("API_KEY environment variable not set or not accessible in this environment.");
+            throw new Error("API_KEY environment variable not found. The chatbot cannot be initialized.");
         }
         
         const ai = new GoogleGenAI({ apiKey: apiKey });
