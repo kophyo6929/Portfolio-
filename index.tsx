@@ -1,5 +1,4 @@
 
-import { GoogleGenAI, Chat } from "@google/genai";
 
 // --- Import data from TypeScript modules ---
 import textContentData from './text';
@@ -7,6 +6,7 @@ import servicesContentData from './services';
 import portfolioContentData from './portfolio';
 import contactContentData from './contact';
 import testimonialsContentData from './testimonials';
+import faqContentData from './faq';
 
 
 // --- Global Content Store ---
@@ -15,14 +15,11 @@ const allServicesContent: any[] = servicesContentData;
 const allPortfolioContent: any[] = portfolioContentData;
 const allContactContent: any = contactContentData;
 const allTestimonialsContent: any[] = testimonialsContentData;
+const allFaqContent: any[] = faqContentData;
 
 
 // --- Global Animation Observer ---
 let animationObserver: IntersectionObserver | null = null;
-
-// --- Global Chatbot Store ---
-let chat: Chat | null = null;
-
 
 // --- App Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -45,20 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    const contentLoaded = initializeApp();
-
-    if (contentLoaded) {
-        // Initialize chatbot separately to prevent it from crashing the main app
-        setupChatbot();
-    }
+    initializeApp();
 });
 
 
 /**
  * Initializes the application using pre-loaded content.
- * Returns a boolean indicating if the initialization was successful.
  */
-function initializeApp(): boolean {
+function initializeApp() {
     try {
         // Content is now available globally from the start
         populateSharedContent();
@@ -68,13 +59,11 @@ function initializeApp(): boolean {
         setupBackToTopButton();
         setupThemeToggle();
         setupContactForm();
-        
-        return true; // Indicate success
+        setupFaqAccordion();
 
     } catch (error) {
         console.error("Failed to initialize website:", error);
         document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while initializing the website. Please check the browser console for details.</p>';
-        return false; // Indicate failure
     }
 }
 
@@ -95,6 +84,7 @@ function populateAllPageSpecificContent() {
     populateAboutPage(allTextContent.about_page, allTestimonialsContent);
     populateServicesPage();
     populatePortfolioPage(allPortfolioContent);
+    populateFaqPage(allFaqContent);
     populateContactPage(allContactContent);
 }
 
@@ -311,6 +301,34 @@ function populatePortfolioPage(portfolioItems: any[]) {
     }
 }
 
+
+/**
+ * Populates the FAQ page with questions and answers.
+ */
+function populateFaqPage(faqItems: any[]) {
+    const faqAccordion = document.querySelector('#page-faq .faq-accordion');
+    if (faqAccordion) {
+        faqAccordion.innerHTML = faqItems.map(item => `
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    ${item.question}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>${item.answer}</p>
+                </div>
+            </div>
+        `).join('');
+
+        // Observe the newly created items for animation
+        if (animationObserver) {
+            faqAccordion.querySelectorAll('.faq-item').forEach(item => {
+                animationObserver.observe(item);
+            });
+        }
+    }
+}
+
 /**
  * Populates the Contact page links and information.
  */
@@ -351,6 +369,7 @@ const pageMetaMap: { [key: string]: string } = {
     'about': 'about_page',
     'services': 'services_page',
     'portfolio': 'portfolio_page',
+    'faq': 'faq_page',
     'contact': 'contact_page'
 };
 
@@ -571,155 +590,34 @@ function setupContactForm() {
     });
 }
 
-// --- AI Chatbot ---
-
 /**
- * A simple markdown parser to convert **bold**, `inline code`, and ```code blocks``` to HTML.
- * It also escapes HTML to prevent XSS.
+ * Sets up the interactive behavior for the FAQ accordion.
  */
-function safeMarkdownParse(text: string): string {
-    // Basic HTML escaping
-    const escapedText = text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+function setupFaqAccordion() {
+    const accordion = document.querySelector('.faq-accordion');
+    if (!accordion) return;
 
-    // Markdown parsing
-    return escapedText
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/```([\s\S]*?)```/g, (_match, code) => `<pre><code>${code.trim()}</code></pre>`)
-        .replace(/`([^`]+)`/g, '<code>$1</code>');
-}
+    accordion.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const questionButton = target.closest('.faq-question');
 
-/**
- * Sets up the AI Chatbot functionality.
- */
-function setupChatbot() {
-    console.log("Attempting to set up chatbot...");
-    
-    const fab = document.getElementById('chatbot-fab');
-    const chatWindow = document.getElementById('chatbot-window');
-    const closeBtn = document.getElementById('chatbot-close');
-    const messagesContainer = document.getElementById('chatbot-messages');
-    const form = document.getElementById('chatbot-form');
-    const input = document.getElementById('chatbot-input') as HTMLInputElement;
-    const thinkingIndicator = document.getElementById('chatbot-thinking');
-    const chatbotContainer = document.getElementById('chatbot-container');
+        if (questionButton) {
+            const faqItem = questionButton.parentElement;
+            if (!faqItem) return;
 
-    if (!chatbotContainer || !fab || !chatWindow || !closeBtn || !messagesContainer || !form || !input || !thinkingIndicator) {
-        console.error("One or more chatbot HTML elements were not found. Chatbot setup aborted.");
-        return;
-    }
+            const wasOpen = faqItem.classList.contains('open');
 
-    const toggleChatbot = (show: boolean) => {
-        chatWindow.classList.toggle('open', show);
-        chatWindow.setAttribute('aria-hidden', String(!show));
-        fab.classList.toggle('hidden', show);
-        if (show) {
-            input.focus();
-        }
-    };
-    
-    fab.addEventListener('click', () => toggleChatbot(true));
-    closeBtn.addEventListener('click', () => toggleChatbot(false));
-    
-    // Initialize the Gemini Chat
-    try {
-        console.log("Checking for API key...");
-        
-        // For browser-based applications deployed on platforms like Vercel, 
-        // environment variables are accessed via `import.meta.env`.
-        // The variable must be prefixed (e.g., VITE_ for Vite projects) to be exposed.
-        // `process.env` is not available in the browser. This change makes the app Vercel-compatible.
-        // @ts-ignore
-        const apiKey = import.meta.env.VITE_API_KEY;
+            // Close all other items
+            accordion.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('open');
+                item.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+            });
 
-        if (!apiKey) {
-            throw new Error("VITE_API_KEY not found. Please set this in your Vercel project's Environment Variables. The chatbot will be disabled.");
-        }
-        
-        console.log("API Key found. Initializing GoogleGenAI...");
-        const ai = new GoogleGenAI({ apiKey });
-
-        const systemInstruction = `You are a helpful AI assistant for a portfolio website for a developer named 'BotDev Pro'. Your goal is to answer questions from potential clients about the developer's skills, services, and portfolio based on the provided context. Do not make up information. If you don't know the answer from the context, say you can't find that information. Keep your answers concise and professional, and encourage users to use the contact form for quotes or detailed project discussions. Use simple markdown for formatting (bold, code blocks). CONTEXT: About=${JSON.stringify(allTextContent.about_page)}, Services=${JSON.stringify(allServicesContent)}, Portfolio=${JSON.stringify(allPortfolioContent)}, Contact=${JSON.stringify(allContactContent)}`;
-
-        chat = ai.chats.create({
-          model: 'gemini-2.5-flash',
-          config: {
-              systemInstruction: systemInstruction,
-          }
-        });
-        
-        console.log("Gemini AI Chat initialized successfully.");
-
-    } catch(error) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        console.error(`Failed to initialize Gemini AI: ${errorMessage}`);
-
-        // If initialization fails, hide the entire chatbot feature.
-        if (chatbotContainer) {
-            chatbotContainer.style.display = 'none';
-            console.error("Hiding chatbot UI due to initialization failure.");
-        }
-        return;
-    }
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const userMessage = input.value.trim();
-        if (!userMessage || !chat) return;
-
-        appendMessage(userMessage, 'user');
-        input.value = '';
-        input.focus();
-        thinkingIndicator.style.display = 'flex';
-
-        try {
-            const result = await chat.sendMessageStream({ message: userMessage });
-            thinkingIndicator.style.display = 'none';
-            
-            const botMessageElem = appendMessage('', 'bot');
-            const botParagraph = botMessageElem.querySelector('p')!;
-            
-            let responseText = '';
-            for await (const chunk of result) {
-                responseText += chunk.text;
-                botParagraph.innerHTML = safeMarkdownParse(responseText);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            // Toggle the clicked item
+            if (!wasOpen) {
+                faqItem.classList.add('open');
+                questionButton.setAttribute('aria-expanded', 'true');
             }
-
-        } catch (error) {
-            console.error('Gemini API Error:', error);
-            thinkingIndicator.style.display = 'none';
-            
-            let errorMessage = "Sorry, I encountered an error. Please try again later.";
-            const errorDetails = error instanceof Error ? error.message : String(error);
-            
-            // Check for common API key error messages to provide a more helpful response
-            if (errorDetails.toLowerCase().includes('api key') || errorDetails.toLowerCase().includes('permission denied')) {
-                errorMessage = "It seems there's an issue with the API key. Please ask the site owner to check their configuration.";
-            }
-            
-            appendMessage(errorMessage, 'bot', true);
-
-        } finally {
-             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
     });
-
-    function appendMessage(text: string, sender: 'user' | 'bot', isError: boolean = false): HTMLElement {
-        const messageElem = document.createElement('div');
-        messageElem.className = `chat-message ${sender}`;
-        if (isError) messageElem.classList.add('error');
-        
-        const p = document.createElement('p');
-        p.innerHTML = safeMarkdownParse(text);
-        messageElem.appendChild(p);
-
-        messagesContainer.appendChild(messageElem);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        return messageElem;
-    }
 }

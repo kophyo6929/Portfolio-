@@ -6,6 +6,7 @@ export default {
     "nav_about": "About",
     "nav_services": "Services",
     "nav_portfolio": "Portfolio",
+    "nav_faq": "FAQ",
     "nav_contact": "Contact",
     "services_dropdown": [
       { "name": "Bot Building", "href": "#building" },
@@ -60,6 +61,14 @@ export default {
       "title": "My Work | Telegram Bot Development Portfolio",
       "description": "Explore my portfolio of custom Telegram bots, featuring advanced e-commerce solutions, automated support systems, and content subscription bots. See my development expertise in action.",
       "keywords": "telegram bot portfolio, bot development examples, e-commerce telegram bot, customer support bot, subscription bot project, bot developer work, botdev pro projects"
+    }
+  },
+  "faq_page": {
+    "title": "Frequently Asked Questions",
+    "meta": {
+      "title": "FAQ | Telegram Bot Development",
+      "description": "Find answers to frequently asked questions about custom Telegram bot development, costs, timelines, and services offered by BotDev Pro.",
+      "keywords": "telegram bot faq, bot development questions, custom bot cost, bot development timeline, bot maintenance"
     }
   },
   "contact_page": {
