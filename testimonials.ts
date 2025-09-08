@@ -1,0 +1,18 @@
+
+export default [
+  {
+    "quote": "The e-commerce bot developed by BotDev Pro has transformed our sales process. It's reliable, fast, and our customers love the convenience. Highly recommended!",
+    "name": "Jane Doe",
+    "company": "CEO, Online Retail Co."
+  },
+  {
+    "quote": "I needed a complex bot with API integrations and a payment gateway. The final product exceeded my expectations. Professional service from start to finish.",
+    "name": "John Smith",
+    "company": "Founder, Tech Startup"
+  },
+  {
+    "quote": "Our support ticket volume has decreased by 40% since implementing the support desk bot. It's an incredible tool that has freed up our team to focus on more complex issues.",
+    "name": "Emily White",
+    "company": "Customer Support Manager"
+  }
+]
