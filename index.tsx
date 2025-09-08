@@ -1,3 +1,4 @@
+
 import { GoogleGenAI, Chat } from "@google/genai";
 
 // --- Global Content Store ---
@@ -51,11 +52,11 @@ async function loadContentAndInitializeApp() {
             contactContentRes, 
             testimonialsContentRes
         ] = await Promise.all([
-            fetch('./text.json'),
-            fetch('./services.json'),
-            fetch('./portfolio.json'),
-            fetch('./contact.json'),
-            fetch('./testimonials.json')
+            fetch('/text.json'),
+            fetch('/services.json'),
+            fetch('/portfolio.json'),
+            fetch('/contact.json'),
+            fetch('/testimonials.json')
         ]);
 
         // Check if all responses are successful

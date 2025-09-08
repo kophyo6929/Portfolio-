@@ -13,7 +13,7 @@
       "User authentication and management"
     ],
     "bot_link": null,
-    "image": "./assets/images/service-building.jpg"
+    "image": "/assets/images/service-building.jpg"
   },
   {
     "id": "renting",
@@ -28,7 +28,7 @@
       "Affordable monthly subscription plans"
     ],
     "bot_link": null,
-    "image": "./assets/images/service-renting.jpg"
+    "image": "/assets/images/service-renting.jpg"
   },
   {
     "id": "hosting",
@@ -43,7 +43,7 @@
       "Technical support included"
     ],
     "bot_link": null,
-    "image": "./assets/images/service-hosting.jpg"
+    "image": "/assets/images/service-hosting.jpg"
   },
   {
     "id": "selling-bot",
@@ -58,7 +58,7 @@
       "Automatic payment release upon successful transfer"
     ],
     "bot_link": "#",
-    "image": "./assets/images/service-account-selling.jpg"
+    "image": "/assets/images/service-account-selling.jpg"
   },
    {
     "id": "receiver-bot",
@@ -73,7 +73,7 @@
       "Easy download of account data"
     ],
     "bot_link": "#",
-    "image": "./assets/images/service-account-receiver.jpg"
+    "image": "/assets/images/service-account-receiver.jpg"
   },
   {
     "id": "isp-store",
@@ -88,7 +88,7 @@
       "Automated billing reminders and support"
     ],
     "bot_link": "#",
-    "image": "./assets/images/service-isp-store.jpg"
+    "image": "/assets/images/service-isp-store.jpg"
   },
   {
     "id": "language",
@@ -103,6 +103,6 @@
       "Progress tracking and gamification"
     ],
     "bot_link": "#",
-    "image": "./assets/images/service-language.jpg"
+    "image": "/assets/images/service-language.jpg"
   }
 ]
