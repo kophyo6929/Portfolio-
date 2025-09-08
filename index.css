@@ -1,3 +1,4 @@
+
 :root {
     --bg-color: #E0E5EC;
     --text-color: #555e67;
@@ -1090,6 +1091,7 @@ html[data-theme="dark"] .chatbot-form {
     color: var(--text-color);
     font-family: inherit;
     font-size: 1rem;
+    min-width: 0; /* Prevents input from pushing button off-screen on mobile */
 }
 .chatbot-form input:focus {
     outline: none;
@@ -1110,6 +1112,7 @@ html[data-theme="dark"] .chatbot-form {
     justify-content: center;
     align-items: center;
     transition: all 0.2s ease;
+    padding: 0;
 }
 .chatbot-form button:hover {
     box-shadow: var(--neumorphic-shadow-hover);

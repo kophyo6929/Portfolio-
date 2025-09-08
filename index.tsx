@@ -1,6 +1,5 @@
 
 
-
 import { GoogleGenAI, Chat } from "@google/genai";
 
 // --- Import data from TypeScript modules ---
@@ -627,14 +626,9 @@ function setupChatbot() {
     
     // Initialize the Gemini Chat
     try {
-        // Fix: Per coding guidelines, the API key must be retrieved from process.env.API_KEY.
-        const apiKey = process.env.API_KEY;
-
-        if (!apiKey) {
-            throw new Error("API_KEY environment variable not found. The chatbot cannot be initialized.");
-        }
-        
-        const ai = new GoogleGenAI({ apiKey: apiKey });
+        // Fix: Use process.env.API_KEY as per the guidelines to initialize GoogleGenAI.
+        // This resolves the TypeScript error related to 'import.meta.env'.
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
         const systemInstruction = `You are a helpful AI assistant for a portfolio website for a developer named 'BotDev Pro'. Your goal is to answer questions from potential clients about the developer's skills, services, and portfolio based on the provided context. Do not make up information. If you don't know the answer from the context, say you can't find that information. Keep your answers concise and professional, and encourage users to use the contact form for quotes or detailed project discussions. Use simple markdown for formatting (bold, code blocks). CONTEXT: About=${JSON.stringify(allTextContent.about_page)}, Services=${JSON.stringify(allServicesContent)}, Portfolio=${JSON.stringify(allPortfolioContent)}, Contact=${JSON.stringify(allContactContent)}`;
 
