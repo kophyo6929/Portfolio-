@@ -671,23 +671,18 @@ function setupChatbot() {
     try {
         logToScreen("Checking for API key...");
         
-        // Log both potential environment variables for debugging purposes
-        const isProcessEnvDefined = typeof process?.env?.API_KEY !== 'undefined' && process.env.API_KEY !== '';
+        // For browser-based applications deployed on platforms like Vercel, 
+        // environment variables are accessed via `import.meta.env`.
+        // The variable must be prefixed (e.g., VITE_ for Vite projects) to be exposed.
+        // `process.env` is not available in the browser. This change makes the app Vercel-compatible.
         // @ts-ignore
-        const isImportMetaEnvDefined = typeof import.meta?.env?.VITE_API_KEY !== 'undefined' && import.meta.env.VITE_API_KEY !== '';
-        
-        logToScreen(`process.env.API_KEY found: ${isProcessEnvDefined}`);
-        logToScreen(`import.meta.env.VITE_API_KEY found: ${isImportMetaEnvDefined}`);
-
-        // Per coding guidelines, exclusively use process.env.API_KEY
-        const apiKey = process.env.API_KEY;
+        const apiKey = import.meta.env.VITE_API_KEY;
 
         if (!apiKey) {
-            // This error will now be clearly visible on the screen.
-            throw new Error("API_KEY not found in environment variables (process.env.API_KEY). The chatbot will be disabled.");
+            throw new Error("VITE_API_KEY not found. Please set this in your Vercel project's Environment Variables. The chatbot will be disabled.");
         }
         
-        logToScreen("API_KEY found. Initializing GoogleGenAI...");
+        logToScreen("API Key found. Initializing GoogleGenAI...");
         const ai = new GoogleGenAI({ apiKey });
 
         const systemInstruction = `You are a helpful AI assistant for a portfolio website for a developer named 'BotDev Pro'. Your goal is to answer questions from potential clients about the developer's skills, services, and portfolio based on the provided context. Do not make up information. If you don't know the answer from the context, say you can't find that information. Keep your answers concise and professional, and encourage users to use the contact form for quotes or detailed project discussions. Use simple markdown for formatting (bold, code blocks). CONTEXT: About=${JSON.stringify(allTextContent.about_page)}, Services=${JSON.stringify(allServicesContent)}, Portfolio=${JSON.stringify(allPortfolioContent)}, Contact=${JSON.stringify(allContactContent)}`;
