@@ -647,11 +647,14 @@ function setupChatbot() {
     
     // Initialize the Gemini Chat
     try {
-        if (!process.env.API_KEY) {
-            throw new Error("API_KEY environment variable not set.");
+        // Safely access the API key, checking if `process` exists first.
+        const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : undefined;
+
+        if (!apiKey) {
+            throw new Error("API_KEY environment variable not set or not accessible in this environment.");
         }
         
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        const ai = new GoogleGenAI({ apiKey: apiKey });
 
         const systemInstruction = `You are a helpful AI assistant for a portfolio website for a developer named 'BotDev Pro'. Your goal is to answer questions from potential clients about the developer's skills, services, and portfolio based on the provided context. Do not make up information. If you don't know the answer from the context, say you can't find that information. Keep your answers concise and professional, and encourage users to use the contact form for quotes or detailed project discussions. Use simple markdown for formatting (bold, code blocks). CONTEXT: About=${JSON.stringify(allTextContent.about_page)}, Services=${JSON.stringify(allServicesContent)}, Portfolio=${JSON.stringify(allPortfolioContent)}, Contact=${JSON.stringify(allContactContent)}`;
 
@@ -664,7 +667,10 @@ function setupChatbot() {
 
     } catch(error) {
         console.error("Failed to initialize Gemini AI:", error);
-        chatbotContainer.style.display = 'none';
+        // If initialization fails (e.g., no API key), hide the entire chatbot feature.
+        if (chatbotContainer) {
+            chatbotContainer.style.display = 'none';
+        }
         return;
     }
 
