@@ -1,5 +1,6 @@
 
 
+
 import { GoogleGenAI, Chat } from "@google/genai";
 
 // --- Import data from TypeScript modules ---
@@ -626,9 +627,7 @@ function setupChatbot() {
     
     // Initialize the Gemini Chat
     try {
-        // As per guidelines, the API key must be retrieved from `process.env.API_KEY`.
-        // For this to work in a Vite project on a platform like Vercel, the environment
-        // variable must be named `VITE_API_KEY` in the Vercel project settings.
+        // Fix: Per coding guidelines, the API key must be retrieved from process.env.API_KEY.
         const apiKey = process.env.API_KEY;
 
         if (!apiKey) {
