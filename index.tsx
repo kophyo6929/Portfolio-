@@ -56,6 +56,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /**
+ * Logs a message to both the browser console and a visible on-screen log viewer.
+ * @param message The message to log.
+ * @param type The type of log ('log', 'error', 'success'). Errors will make the viewer visible.
+ */
+function logToScreen(message: string, type: 'log' | 'error' | 'success' = 'log') {
+    const logViewer = document.getElementById('log-viewer');
+    if (!logViewer) {
+        console.error("Log viewer element not found!");
+        return;
+    }
+
+    const logEntry = document.createElement('p');
+    logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+
+    switch (type) {
+        case 'error':
+            console.error(message);
+            logEntry.className = 'log-error';
+            // Make the log viewer visible on the first error
+            if (logViewer.style.display === 'none') {
+                logViewer.style.display = 'block';
+            }
+            break;
+        case 'success':
+            console.log(message);
+            logEntry.className = 'log-success';
+            break;
+        default:
+            console.log(message);
+            break;
+    }
+
+    logViewer.appendChild(logEntry);
+    // Scroll to the bottom of the log viewer
+    logViewer.scrollTop = logViewer.scrollHeight;
+}
+
+
+/**
  * Initializes the application using pre-loaded content.
  * Returns a boolean indicating if the initialization was successful.
  */
@@ -74,7 +113,8 @@ function initializeApp(): boolean {
 
     } catch (error) {
         console.error("Failed to initialize website:", error);
-        document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while initializing the website. Please try again later.</p>';
+        logToScreen(`Critical App Initialization Error: ${error instanceof Error ? error.message : String(error)}`, 'error');
+        document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while initializing the website. Please see logs for details.</p>';
         return false; // Indicate failure
     }
 }
@@ -598,6 +638,8 @@ function safeMarkdownParse(text: string): string {
  * Sets up the AI Chatbot functionality.
  */
 function setupChatbot() {
+    logToScreen("Attempting to set up chatbot...");
+    
     const fab = document.getElementById('chatbot-fab');
     const chatWindow = document.getElementById('chatbot-window');
     const closeBtn = document.getElementById('chatbot-close');
@@ -608,6 +650,7 @@ function setupChatbot() {
     const chatbotContainer = document.getElementById('chatbot-container');
 
     if (!chatbotContainer || !fab || !chatWindow || !closeBtn || !messagesContainer || !form || !input || !thinkingIndicator) {
+        logToScreen("One or more chatbot HTML elements were not found. Chatbot setup aborted.", 'error');
         console.error("Chatbot elements not found.");
         return;
     }
@@ -626,13 +669,25 @@ function setupChatbot() {
     
     // Initialize the Gemini Chat
     try {
-        // Fix: Use process.env.API_KEY to get the API key as per the coding guidelines. This resolves the TypeScript error with `import.meta.env`.
+        logToScreen("Checking for API key...");
+        
+        // Log both potential environment variables for debugging purposes
+        const isProcessEnvDefined = typeof process?.env?.API_KEY !== 'undefined' && process.env.API_KEY !== '';
+        // @ts-ignore
+        const isImportMetaEnvDefined = typeof import.meta?.env?.VITE_API_KEY !== 'undefined' && import.meta.env.VITE_API_KEY !== '';
+        
+        logToScreen(`process.env.API_KEY found: ${isProcessEnvDefined}`);
+        logToScreen(`import.meta.env.VITE_API_KEY found: ${isImportMetaEnvDefined}`);
+
+        // Per coding guidelines, exclusively use process.env.API_KEY
         const apiKey = process.env.API_KEY;
 
         if (!apiKey) {
-            throw new Error("API_KEY not found in environment variables. The chatbot will be disabled.");
+            // This error will now be clearly visible on the screen.
+            throw new Error("API_KEY not found in environment variables (process.env.API_KEY). The chatbot will be disabled.");
         }
         
+        logToScreen("API_KEY found. Initializing GoogleGenAI...");
         const ai = new GoogleGenAI({ apiKey });
 
         const systemInstruction = `You are a helpful AI assistant for a portfolio website for a developer named 'BotDev Pro'. Your goal is to answer questions from potential clients about the developer's skills, services, and portfolio based on the provided context. Do not make up information. If you don't know the answer from the context, say you can't find that information. Keep your answers concise and professional, and encourage users to use the contact form for quotes or detailed project discussions. Use simple markdown for formatting (bold, code blocks). CONTEXT: About=${JSON.stringify(allTextContent.about_page)}, Services=${JSON.stringify(allServicesContent)}, Portfolio=${JSON.stringify(allPortfolioContent)}, Contact=${JSON.stringify(allContactContent)}`;
@@ -643,12 +698,18 @@ function setupChatbot() {
               systemInstruction: systemInstruction,
           }
         });
+        
+        logToScreen("Gemini AI Chat initialized successfully.", "success");
 
     } catch(error) {
-        console.error("Failed to initialize Gemini AI:", error);
-        // If initialization fails (e.g., no API key), hide the entire chatbot feature.
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        logToScreen(`Failed to initialize Gemini AI: ${errorMessage}`, 'error');
+        console.error("Gemini AI Initialization Error:", error);
+
+        // If initialization fails, hide the entire chatbot feature.
         if (chatbotContainer) {
             chatbotContainer.style.display = 'none';
+            logToScreen("Hiding chatbot UI due to initialization failure.", 'error');
         }
         return;
     }
