@@ -16,7 +16,7 @@ let chat: Chat | null = null;
 
 
 // --- App Initialization ---
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Setup the Intersection Observer for scroll animations
     animationObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -36,14 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    loadContentAndInitializeApp();
+    const contentLoaded = await loadContentAndInitializeApp();
+
+    if (contentLoaded) {
+        // Initialize chatbot separately to prevent it from crashing the main app
+        setupChatbot();
+    }
 });
 
 
 /**
  * Fetches all content from JSON files and then initializes the application.
+ * Returns a boolean indicating if the content loaded successfully.
  */
-async function loadContentAndInitializeApp() {
+async function loadContentAndInitializeApp(): Promise<boolean> {
     try {
         const [
             textContentRes, 
@@ -84,11 +90,13 @@ async function loadContentAndInitializeApp() {
         setupBackToTopButton();
         setupThemeToggle();
         setupContactForm();
-        setupChatbot();
+        
+        return true; // Indicate success
 
     } catch (error) {
         console.error("Failed to load website content:", error);
         document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while loading website content. Please try again later.</p>';
+        return false; // Indicate failure
     }
 }
 
