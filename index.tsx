@@ -272,6 +272,11 @@ function displayServiceDetails(serviceId: string) {
 
     contentDisplay.innerHTML = `<div class="service-details-container">${detailsHtml}</div>`;
 
+    // Smoothly scroll to the content on mobile/tablet
+    if (window.innerWidth <= 900) {
+        contentDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     // Observe the newly created cards for animation
     if (animationObserver) {
         contentDisplay.querySelectorAll('.service-card').forEach(card => {
@@ -363,6 +368,11 @@ function displayFaqAnswer(faqIndex: number) {
     `;
 
     contentDisplay.innerHTML = answerHtml;
+
+    // Smoothly scroll to the content on mobile/tablet
+    if (window.innerWidth <= 900) {
+        contentDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 

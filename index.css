@@ -430,6 +430,7 @@ html[data-theme="dark"] .service-nav-btn:hover {
 
 .service-content-display {
     min-height: 400px;
+    scroll-margin-top: 5rem; /* For smooth scrolling anchor */
 }
 
 .service-details-container {
@@ -633,6 +634,7 @@ html[data-theme="dark"] .faq-nav-btn:hover {
 
 .faq-content-display {
     min-height: 300px;
+    scroll-margin-top: 5rem; /* For smooth scrolling anchor */
 }
 
 .faq-answer-card {
