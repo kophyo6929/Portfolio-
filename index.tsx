@@ -1,5 +1,4 @@
 
-
 // --- Import data from TypeScript modules ---
 import textContentData from './text';
 import servicesContentData from './services';
@@ -59,7 +58,6 @@ function initializeApp() {
         setupBackToTopButton();
         setupThemeToggle();
         setupContactForm();
-        setupFaqAccordion();
 
     } catch (error) {
         console.error("Failed to initialize website:", error);
@@ -105,14 +103,22 @@ function populateText(content: any) {
 }
 
 /**
- * Populates the header navigation dropdown.
+ * Populates the header navigation dropdowns.
  */
 function populateHeader(headerContent: any) {
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    if (dropdownMenu && headerContent.services_dropdown) {
-        dropdownMenu.innerHTML = headerContent.services_dropdown.map((item: {name: string, href: string}) =>
-            // Add data-page attribute to ensure SPA routing works for dropdown items
+    // Populate Services Dropdown
+    const servicesDropdownMenu = document.getElementById('services-dropdown-menu');
+    if (servicesDropdownMenu && headerContent.services_dropdown) {
+        servicesDropdownMenu.innerHTML = headerContent.services_dropdown.map((item: {name: string, href: string}) =>
             `<li><a href="${item.href}" data-page="services">${item.name}</a></li>`
+        ).join('');
+    }
+
+    // Populate FAQ Dropdown
+    const faqDropdownMenu = document.getElementById('faq-dropdown-menu');
+    if (faqDropdownMenu && allFaqContent) {
+        faqDropdownMenu.innerHTML = allFaqContent.map((item, index) =>
+            `<li><a href="#faq-item-${index}" data-page="faq">${item.question}</a></li>`
         ).join('');
     }
 }
@@ -303,31 +309,62 @@ function populatePortfolioPage(portfolioItems: any[]) {
 
 
 /**
- * Populates the FAQ page with questions and answers.
+ * Populates the interactive FAQ page.
  */
 function populateFaqPage(faqItems: any[]) {
-    const faqAccordion = document.querySelector('#page-faq .faq-accordion');
-    if (faqAccordion) {
-        faqAccordion.innerHTML = faqItems.map(item => `
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">
-                    ${item.question}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>${item.answer}</p>
-                </div>
-            </div>
-        `).join('');
+    const faqNav = document.querySelector('.faq-nav');
+    if (!faqNav || !faqItems) return;
 
-        // Observe the newly created items for animation
-        if (animationObserver) {
-            faqAccordion.querySelectorAll('.faq-item').forEach(item => {
-                animationObserver.observe(item);
-            });
+    // Create navigation buttons for each question
+    faqNav.innerHTML = faqItems.map((item, index) => 
+        `<button class="faq-nav-btn" data-faq-index="${index}">${item.question}</button>`
+    ).join('');
+
+    // Add click listeners to the navigation buttons
+    faqNav.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const button = target.closest('.faq-nav-btn');
+        if (button) {
+            const faqIndex = button.getAttribute('data-faq-index');
+            if (faqIndex) {
+                displayFaqAnswer(parseInt(faqIndex, 10));
+            }
         }
+    });
+
+    // Display the first answer by default
+    if (faqItems.length > 0) {
+        displayFaqAnswer(0);
+    } else {
+         const contentDisplay = document.querySelector('.faq-content-display');
+         if(contentDisplay) contentDisplay.innerHTML = ""; // Clear loader if no FAQs
     }
 }
+
+/**
+ * Displays the answer for a specific FAQ item.
+ * @param faqIndex The index of the FAQ item to display.
+ */
+function displayFaqAnswer(faqIndex: number) {
+    const faqItem = allFaqContent[faqIndex];
+    const contentDisplay = document.querySelector('.faq-content-display');
+    if (!faqItem || !contentDisplay) return;
+
+    // Update active state on navigation buttons
+    document.querySelectorAll('.faq-nav-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.getAttribute('data-faq-index') || '-1', 10) === faqIndex);
+    });
+
+    const answerHtml = `
+        <div class="faq-answer-card">
+            <h4>${faqItem.question}</h4>
+            <p>${faqItem.answer}</p>
+        </div>
+    `;
+
+    contentDisplay.innerHTML = answerHtml;
+}
+
 
 /**
  * Populates the Contact page links and information.
@@ -412,17 +449,16 @@ function showPage(pageId: string) {
 function setupAppNavigation() {
     const navLinks = document.querySelector('.nav-links') as HTMLElement;
     const hamburger = document.getElementById('hamburger-menu') as HTMLButtonElement;
-    const dropdown = document.querySelector('.dropdown') as HTMLLIElement;
-
+    
     // Hamburger menu toggle
     hamburger?.addEventListener('click', () => {
         const isOpen = navLinks.classList.toggle('open');
         hamburger.classList.toggle('open');
         hamburger.setAttribute('aria-expanded', String(isOpen));
     });
-
+    
     // Dropdown menu toggle on mobile
-    if (dropdown) {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
         const dropdownToggle = dropdown.querySelector('.dropdown-toggle') as HTMLAnchorElement;
         dropdownToggle?.addEventListener('click', (e) => {
             if (window.innerWidth <= 768) {
@@ -432,7 +468,8 @@ function setupAppNavigation() {
                 dropdown.classList.toggle('open');
             }
         });
-    }
+    });
+
 
     // Main navigation click handler for SPA routing
     document.body.addEventListener('click', (e) => {
@@ -460,9 +497,18 @@ function setupAppNavigation() {
                         const elementToScrollTo = document.getElementById(elementId);
                         if (elementToScrollTo) {
                            elementToScrollTo.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        } else {
-                           // If it's a service, handle it with the detail view function
+                        } else if (pageId === 'services') {
                            displayServiceDetails(elementId);
+                        } else if (pageId === 'faq' && elementId.startsWith('faq-item-')) {
+                           const faqIndex = parseInt(elementId.replace('faq-item-', ''), 10);
+                           if (!isNaN(faqIndex)) {
+                               displayFaqAnswer(faqIndex);
+                               // Scroll the new content into view for better UX
+                               const answerCard = document.querySelector('.faq-answer-card');
+                               if (answerCard) {
+                                   answerCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                               }
+                           }
                         }
                     }, 150); 
                 }
@@ -473,10 +519,8 @@ function setupAppNavigation() {
                     hamburger?.classList.remove('open');
                     hamburger?.setAttribute('aria-expanded', 'false');
 
-                    // If a dropdown was open, close it too
-                    if (dropdown.classList.contains('open')) {
-                        dropdown.classList.remove('open');
-                    }
+                    // Close any open dropdowns
+                    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
                 }
             }
         }
@@ -587,37 +631,5 @@ function setupContactForm() {
         setTimeout(() => {
             messageDisplay.classList.remove('show');
         }, 5000);
-    });
-}
-
-/**
- * Sets up the interactive behavior for the FAQ accordion.
- */
-function setupFaqAccordion() {
-    const accordion = document.querySelector('.faq-accordion');
-    if (!accordion) return;
-
-    accordion.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        const questionButton = target.closest('.faq-question');
-
-        if (questionButton) {
-            const faqItem = questionButton.parentElement;
-            if (!faqItem) return;
-
-            const wasOpen = faqItem.classList.contains('open');
-
-            // Close all other items
-            accordion.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('open');
-                item.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-            });
-
-            // Toggle the clicked item
-            if (!wasOpen) {
-                faqItem.classList.add('open');
-                questionButton.setAttribute('aria-expanded', 'true');
-            }
-        }
     });
 }

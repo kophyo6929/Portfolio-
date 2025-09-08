@@ -22,12 +22,17 @@
                 <li><a href="#" data-page="about" data-text="header.nav_about"></a></li>
                 <li class="nav-item dropdown">
                     <a href="#" data-page="services" data-text="header.nav_services" class="dropdown-toggle"></a>
-                    <ul class="dropdown-menu">
+                    <ul id="services-dropdown-menu" class="dropdown-menu">
                         <!-- Dropdown items will be populated by JS -->
                     </ul>
                 </li>
                 <li><a href="#" data-page="portfolio" data-text="header.nav_portfolio"></a></li>
-                <li><a href="#" data-page="faq" data-text="header.nav_faq"></a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" data-page="faq" data-text="header.nav_faq" class="dropdown-toggle"></a>
+                    <ul id="faq-dropdown-menu" class="dropdown-menu">
+                         <!-- Dropdown items will be populated by JS -->
+                    </ul>
+                </li>
                 <li><a href="#" data-page="contact" data-text="header.nav_contact"></a></li>
             </ul>
              <div class="controls-container">
@@ -52,7 +57,10 @@
             <div class="hero-content">
                 <h1 class="animate-in" data-text="home.title"></h1>
                 <p class="animate-in" data-text="home.subtitle"></p>
-                <a href="#" data-page="services" class="btn btn-primary animate-in" data-text="home.cta"></a>
+                <div class="hero-actions animate-in">
+                    <a href="#" data-page="services" class="btn btn-primary" data-text="home.cta"></a>
+                    <a href="#" data-page="faq" class="btn" data-text="home.cta_faq"></a>
+                </div>
             </div>
         </section>
 
@@ -103,8 +111,13 @@
         <section id="page-faq" class="page-content faq-section content-section">
             <div class="container animate-in">
                 <h2 data-text="faq_page.title"></h2>
-                <div class="faq-accordion">
-                    <div class="loader"></div>
+                <div class="faq-container">
+                    <nav class="faq-nav">
+                        <div class="loader"></div>
+                    </nav>
+                    <div class="faq-content-display">
+                        <div class="loader"></div>
+                    </div>
                 </div>
             </div>
         </section>

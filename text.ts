@@ -21,6 +21,7 @@ export default {
     "title": "Expert Telegram Bot Developer",
     "subtitle": "Creating powerful, intelligent, and seamless bots to automate your business and engage your audience.",
     "cta": "Explore Services",
+    "cta_faq": "View FAQs",
     "meta": {
       "title": "Expert Telegram Bot Developer | Custom Automation & API Integration",
       "description": "Hire a top-rated Telegram bot developer specializing in custom bots for business automation, e-commerce, and API integration. Get a free quote for your project.",
