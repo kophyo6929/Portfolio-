@@ -20,9 +20,9 @@
     "subtitle": "Creating powerful, intelligent, and seamless bots to automate your business and engage your audience.",
     "cta": "Explore Services",
     "meta": {
-      "title": "Expert Telegram Bot Developer | BotDev Pro",
-      "description": "Top-rated Telegram bot developer specializing in custom bots for business automation, e-commerce, and user engagement. Get a free quote for your project.",
-      "keywords": "Telegram bot developer, custom Telegram bots, bot development, BotDev Pro, Python bot, Node.js bot, aiogram developer, telegraf developer, hire bot developer"
+      "title": "Expert Telegram Bot Developer | Custom Automation & API Integration",
+      "description": "Hire a top-rated Telegram bot developer specializing in custom bots for business automation, e-commerce, and API integration. Get a free quote for your project.",
+      "keywords": "Telegram bot developer, custom Telegram bots, hire bot developer, Python aiogram, Node.js Telegraf, bot development services, Telegram automation, API integration"
     }
   },
   "about_page": {
@@ -40,25 +40,25 @@
     ],
     "testimonials_title": "What My Clients Say",
     "meta": {
-      "title": "About Me & Skills | Professional Telegram Developer",
-      "description": "Learn about my 5+ years of experience as a professional Telegram Bot developer. My skills include Python (aiogram), Node.js (Telegraf), API integration, and database design.",
-      "keywords": "about telegram developer, skills, telegram bot expert, aiogram, telegraf.js, API integration, python, node.js, bot developer portfolio"
+      "title": "About Me | Experienced Telegram Bot Developer",
+      "description": "With 5+ years of experience, I build high-performance Telegram bots using Python (aiogram) and Node.js (Telegraf). Discover my skills in API integration, database design, and bot deployment.",
+      "keywords": "telegram bot expert, aiogram developer, telegraf.js expert, python bot developer, node.js bot developer, bot developer skills, developer portfolio"
     }
   },
   "services_page": {
     "title": "My Services",
     "meta": {
-      "title": "Telegram Bot Development Services | BotDev Pro",
-      "description": "Explore a full range of Telegram bot services: custom bot building, bot rentals, managed hosting, and account trading bots. Get a tailored solution for your business.",
-      "keywords": "telegram bot services, custom bot building, telegram bot rental, telegram bot hosting, e-commerce bot, subscription bot, telegram automation"
+      "title": "Telegram Bot Development Services | Custom Builds, Hosting & Rentals",
+      "description": "Full-range Telegram bot services: custom bot development from scratch, reliable bot hosting, and affordable bot rentals. Let's build a solution to automate and grow your business.",
+      "keywords": "telegram bot services, custom bot development, telegram bot hosting, rent telegram bot, e-commerce bot, subscription bot, telegram automation solutions"
     }
   },
   "portfolio_page": {
     "title": "My Work",
     "meta": {
-      "title": "Telegram Bot Portfolio | BotDev Pro",
-      "description": "Browse my portfolio of custom Telegram bots, including advanced e-commerce bots, automated support desk bots, and content subscription management systems.",
-      "keywords": "telegram bot portfolio, bot examples, e-commerce bot telegram, support bot, subscription bot, bot development work, botdev pro projects"
+      "title": "My Work | Telegram Bot Development Portfolio",
+      "description": "Explore my portfolio of custom Telegram bots, featuring advanced e-commerce solutions, automated support systems, and content subscription bots. See my development expertise in action.",
+      "keywords": "telegram bot portfolio, bot development examples, e-commerce telegram bot, customer support bot, subscription bot project, bot developer work, botdev pro projects"
     }
   },
   "contact_page": {
@@ -69,12 +69,12 @@
       "email_label": "Your Email",
       "message_label": "Your Message",
       "submit_button": "Send Message",
-      "success_message": "Thank you! Your message has been sent successfully."
+      "success_message": "Thank you! Your default email client should now be open for you to send your message."
     },
     "meta": {
-      "title": "Contact a Telegram Developer | BotDev Pro",
-      "description": "Get in touch to discuss your Telegram bot project. I'm available for new projects and collaborations. Let's build your bot together.",
-      "keywords": "contact telegram developer, hire bot developer, project inquiry, botdev pro contact, get a quote, telegram bot consultation"
+      "title": "Contact | Hire a Freelance Telegram Bot Developer",
+      "description": "Ready to start your Telegram bot project? Contact me for a free consultation and quote. I'm available for new freelance projects and collaborations.",
+      "keywords": "contact telegram developer, hire telegram bot developer, freelance bot developer, bot project quote, telegram bot consultation, get in touch"
     }
   },
   "footer": {

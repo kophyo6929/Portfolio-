@@ -10,6 +10,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -103,6 +110,23 @@
                 <h2 data-text="contact_page.title"></h2>
                 <p data-text="contact_page.description"></p>
 
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div id="form-message-display" class="form-message" role="status" aria-live="polite"></div>
+                    <div class="form-group">
+                        <label for="contact-name" data-text="contact_page.form.name_label">Your Name</label>
+                        <input type="text" id="contact-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email" data-text="contact_page.form.email_label">Your Email</label>
+                        <input type="email" id="contact-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message" data-text="contact_page.form.message_label">Your Message</label>
+                        <textarea id="contact-message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-text="contact_page.form.submit_button">Send Message</button>
+                </form>
+
                  <div class="socials">
                     <a href="#" id="contact-telegram" class="social-icon" aria-label="Telegram Profile" target="_blank" rel="noopener noreferrer">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.8,3.2c-0.4-0.4-1-0.5-1.5-0.1L3.5,10.9c-0.5,0.2-0.8,0.7-0.8,1.2s0.3,1,0.8,1.2l4.2,1.7l1.7,4.2c0.2,0.5,0.7,0.8,1.2,0.8c0,0,0,0,0,0c0.5,0,1-0.3,1.2-0.8L21.9,4.7C22.3,4.2,22.2,3.6,21.8,3.2z M17.6,7.1L10,14.7l-2.8-1.1L17.6,7.1z M7.1,17.6l-1.1-2.8l7.6-7.6L17.6,7.1L7.1,17.6z"></path></svg>
@@ -124,6 +148,32 @@
     <footer class="main-footer-bottom">
         <p data-text="footer.copyright"></p>
     </footer>
+
+    <div id="chatbot-container">
+        <button id="chatbot-fab" class="chatbot-fab" aria-label="Open AI assistant">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V4c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
+        </button>
+        <div id="chatbot-window" class="chatbot-window" role="dialog" aria-hidden="true">
+            <header class="chatbot-header">
+                <h3>AI Assistant</h3>
+                <button id="chatbot-close" class="chatbot-close-btn" aria-label="Close chat">&times;</button>
+            </header>
+            <div id="chatbot-messages" class="chatbot-messages" role="log" aria-live="polite">
+                <div class="chat-message bot">
+                    <p>Hello! I'm an AI assistant. How can I help you learn more about BotDev Pro's services?</p>
+                </div>
+            </div>
+            <div class="chatbot-thinking" id="chatbot-thinking" style="display: none;">
+                <span></span><span></span><span></span>
+            </div>
+            <form id="chatbot-form" class="chatbot-form">
+                <input type="text" id="chatbot-input" placeholder="Ask about services, skills..." autocomplete="off" required>
+                <button type="submit" id="chatbot-send" aria-label="Send message">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </form>
+        </div>
+    </div>
 
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"/></svg>
