@@ -1,5 +1,4 @@
 
-
 import { GoogleGenAI, Chat } from "@google/genai";
 
 // --- Import data from TypeScript modules ---
@@ -56,45 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /**
- * Logs a message to both the browser console and a visible on-screen log viewer.
- * @param message The message to log.
- * @param type The type of log ('log', 'error', 'success'). Errors will make the viewer visible.
- */
-function logToScreen(message: string, type: 'log' | 'error' | 'success' = 'log') {
-    const logViewer = document.getElementById('log-viewer');
-    if (!logViewer) {
-        console.error("Log viewer element not found!");
-        return;
-    }
-
-    const logEntry = document.createElement('p');
-    logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-
-    switch (type) {
-        case 'error':
-            console.error(message);
-            logEntry.className = 'log-error';
-            // Make the log viewer visible on the first error
-            if (logViewer.style.display === 'none') {
-                logViewer.style.display = 'block';
-            }
-            break;
-        case 'success':
-            console.log(message);
-            logEntry.className = 'log-success';
-            break;
-        default:
-            console.log(message);
-            break;
-    }
-
-    logViewer.appendChild(logEntry);
-    // Scroll to the bottom of the log viewer
-    logViewer.scrollTop = logViewer.scrollHeight;
-}
-
-
-/**
  * Initializes the application using pre-loaded content.
  * Returns a boolean indicating if the initialization was successful.
  */
@@ -113,8 +73,7 @@ function initializeApp(): boolean {
 
     } catch (error) {
         console.error("Failed to initialize website:", error);
-        logToScreen(`Critical App Initialization Error: ${error instanceof Error ? error.message : String(error)}`, 'error');
-        document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while initializing the website. Please see logs for details.</p>';
+        document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while initializing the website. Please check the browser console for details.</p>';
         return false; // Indicate failure
     }
 }
@@ -638,7 +597,7 @@ function safeMarkdownParse(text: string): string {
  * Sets up the AI Chatbot functionality.
  */
 function setupChatbot() {
-    logToScreen("Attempting to set up chatbot...");
+    console.log("Attempting to set up chatbot...");
     
     const fab = document.getElementById('chatbot-fab');
     const chatWindow = document.getElementById('chatbot-window');
@@ -650,8 +609,7 @@ function setupChatbot() {
     const chatbotContainer = document.getElementById('chatbot-container');
 
     if (!chatbotContainer || !fab || !chatWindow || !closeBtn || !messagesContainer || !form || !input || !thinkingIndicator) {
-        logToScreen("One or more chatbot HTML elements were not found. Chatbot setup aborted.", 'error');
-        console.error("Chatbot elements not found.");
+        console.error("One or more chatbot HTML elements were not found. Chatbot setup aborted.");
         return;
     }
 
@@ -669,7 +627,7 @@ function setupChatbot() {
     
     // Initialize the Gemini Chat
     try {
-        logToScreen("Checking for API key...");
+        console.log("Checking for API key...");
         
         // For browser-based applications deployed on platforms like Vercel, 
         // environment variables are accessed via `import.meta.env`.
@@ -682,7 +640,7 @@ function setupChatbot() {
             throw new Error("VITE_API_KEY not found. Please set this in your Vercel project's Environment Variables. The chatbot will be disabled.");
         }
         
-        logToScreen("API Key found. Initializing GoogleGenAI...");
+        console.log("API Key found. Initializing GoogleGenAI...");
         const ai = new GoogleGenAI({ apiKey });
 
         const systemInstruction = `You are a helpful AI assistant for a portfolio website for a developer named 'BotDev Pro'. Your goal is to answer questions from potential clients about the developer's skills, services, and portfolio based on the provided context. Do not make up information. If you don't know the answer from the context, say you can't find that information. Keep your answers concise and professional, and encourage users to use the contact form for quotes or detailed project discussions. Use simple markdown for formatting (bold, code blocks). CONTEXT: About=${JSON.stringify(allTextContent.about_page)}, Services=${JSON.stringify(allServicesContent)}, Portfolio=${JSON.stringify(allPortfolioContent)}, Contact=${JSON.stringify(allContactContent)}`;
@@ -694,17 +652,16 @@ function setupChatbot() {
           }
         });
         
-        logToScreen("Gemini AI Chat initialized successfully.", "success");
+        console.log("Gemini AI Chat initialized successfully.");
 
     } catch(error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        logToScreen(`Failed to initialize Gemini AI: ${errorMessage}`, 'error');
-        console.error("Gemini AI Initialization Error:", error);
+        console.error(`Failed to initialize Gemini AI: ${errorMessage}`);
 
         // If initialization fails, hide the entire chatbot feature.
         if (chatbotContainer) {
             chatbotContainer.style.display = 'none';
-            logToScreen("Hiding chatbot UI due to initialization failure.", 'error');
+            console.error("Hiding chatbot UI due to initialization failure.");
         }
         return;
     }
@@ -736,7 +693,17 @@ function setupChatbot() {
         } catch (error) {
             console.error('Gemini API Error:', error);
             thinkingIndicator.style.display = 'none';
-            appendMessage("Sorry, I encountered an error. Please try again later.", 'bot', true);
+            
+            let errorMessage = "Sorry, I encountered an error. Please try again later.";
+            const errorDetails = error instanceof Error ? error.message : String(error);
+            
+            // Check for common API key error messages to provide a more helpful response
+            if (errorDetails.toLowerCase().includes('api key') || errorDetails.toLowerCase().includes('permission denied')) {
+                errorMessage = "It seems there's an issue with the API key. Please ask the site owner to check their configuration.";
+            }
+            
+            appendMessage(errorMessage, 'bot', true);
+
         } finally {
              messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
