@@ -1,12 +1,21 @@
 
 import { GoogleGenAI, Chat } from "@google/genai";
 
+// --- Import JSON data directly ---
+import textContentData from './text.json';
+import servicesContentData from './services.json';
+import portfolioContentData from './portfolio.json';
+import contactContentData from './contact.json';
+import testimonialsContentData from './testimonials.json';
+
+
 // --- Global Content Store ---
-let allTextContent: any;
-let allServicesContent: any[];
-let allPortfolioContent: any[];
-let allContactContent: any;
-let allTestimonialsContent: any[];
+const allTextContent: any = textContentData;
+const allServicesContent: any[] = servicesContentData;
+const allPortfolioContent: any[] = portfolioContentData;
+const allContactContent: any = contactContentData;
+const allTestimonialsContent: any[] = testimonialsContentData;
+
 
 // --- Global Animation Observer ---
 let animationObserver: IntersectionObserver | null = null;
@@ -16,7 +25,7 @@ let chat: Chat | null = null;
 
 
 // --- App Initialization ---
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Setup the Intersection Observer for scroll animations
     animationObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -36,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
     
-    const contentLoaded = await loadContentAndInitializeApp();
+    const contentLoaded = initializeApp();
 
     if (contentLoaded) {
         // Initialize chatbot separately to prevent it from crashing the main app
@@ -46,43 +55,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 /**
- * Fetches all content from JSON files and then initializes the application.
- * Returns a boolean indicating if the content loaded successfully.
+ * Initializes the application using pre-loaded content.
+ * Returns a boolean indicating if the initialization was successful.
  */
-async function loadContentAndInitializeApp(): Promise<boolean> {
+function initializeApp(): boolean {
     try {
-        const [
-            textContentRes, 
-            servicesContentRes, 
-            portfolioContentRes, 
-            contactContentRes, 
-            testimonialsContentRes
-        ] = await Promise.all([
-            fetch('/text.json'),
-            fetch('/services.json'),
-            fetch('/portfolio.json'),
-            fetch('/contact.json'),
-            fetch('/testimonials.json')
-        ]);
-
-        // Check if all responses are successful
-        const responses = [textContentRes, servicesContentRes, portfolioContentRes, contactContentRes, testimonialsContentRes];
-        for (const res of responses) {
-            if (!res.ok) {
-                throw new Error(`Failed to fetch ${res.url}: ${res.statusText}`);
-            }
-        }
-
-        // Parse JSON from responses
-        [
-            allTextContent, 
-            allServicesContent, 
-            allPortfolioContent, 
-            allContactContent, 
-            allTestimonialsContent
-        ] = await Promise.all(responses.map(res => res.json()));
-
-        // Once content is loaded, populate and set up the app
+        // Content is now available globally from the start
         populateSharedContent();
         populateAllPageSpecificContent();
         
@@ -94,8 +72,8 @@ async function loadContentAndInitializeApp(): Promise<boolean> {
         return true; // Indicate success
 
     } catch (error) {
-        console.error("Failed to load website content:", error);
-        document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while loading website content. Please try again later.</p>';
+        console.error("Failed to initialize website:", error);
+        document.body.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--error-color);">Sorry, an error occurred while initializing the website. Please try again later.</p>';
         return false; // Indicate failure
     }
 }
