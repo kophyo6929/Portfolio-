@@ -1,4 +1,5 @@
 
+
 // --- Import data from TypeScript modules ---
 import textContentData from './text';
 import servicesContentData from './services';
@@ -418,7 +419,9 @@ const pageMetaMap: { [key: string]: string } = {
     'services': 'services_page',
     'portfolio': 'portfolio_page',
     'faq': 'faq_page',
-    'contact': 'contact_page'
+    'contact': 'contact_page',
+    'privacy': 'privacy_page',
+    'terms': 'terms_page'
 };
 
 /**
@@ -446,7 +449,7 @@ function showPage(pageId: string) {
     }
     
     // Update active state on navigation links
-    document.querySelectorAll('.nav-links a, .logo').forEach(link => {
+    document.querySelectorAll('.nav-links a, .logo, .footer-legal-links a').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('data-page') === pageId) {
             link.classList.add('active');

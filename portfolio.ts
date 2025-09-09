@@ -1,39 +1,33 @@
 
 export default [
   {
-    "title": "E-commerce Bot",
-    "description": "A complete shopping bot with product catalog, cart, and Stripe integration.",
-    "link": "#",
-    "image": "/assets/images/portfolio-ecommerce.jpg"
+    "title": "Cineverse Bot",
+    "description": "A user-friendly bot for discovering movies and TV series. Features include browsing by year, category, and direct file access.",
+    "link": "https://t.me/TWMVBOT",
+    "image": "assets/images/cineverse.jpg"
   },
   {
-    "title": "Support Desk Bot",
-    "description": "Automates customer support by creating tickets and answering common questions.",
-    "link": "#",
-    "image": "/assets/images/portfolio-support.jpg"
+    "title": "HSK For Beginners Bot",
+    "description": "An interactive language learning assistant designed to help users study for the Chinese Proficiency Test (HSK) with lessons, reviews, and progress tracking.",
+    "link": "https://t.me/HSK_FOR_BEGINNER_BOT",
+    "image": "assets/images/hsk.jpg"
   },
   {
-    "title": "Content Subscription Bot",
-    "description": "Manages paid subscriptions for exclusive content in a private channel.",
-    "link": "#",
-    "image": "/assets/images/portfolio-subscription.jpg"
+    "title": "Atom Point Bot",
+    "description": "A custom e-commerce bot for digital goods or services, like ISP plans. Allows users to browse products, buy credits, and manage orders seamlessly.",
+    "link": "https.t.me/AtomPointBot",
+    "image": "assets/images/atompoint.jpg"
   },
   {
-    "title": "Community Management Bot",
-    "description": "An all-in-one bot for group moderation, welcome messages, anti-spam, and user engagement analytics.",
-    "link": "#",
-    "image": "/assets/images/portfolio-community.jpg"
+    "title": "TW Session Marketplace Bot",
+    "description": "A secure platform for buying and selling Telegram sessions. Features include account management, funding options, and a focus on security.",
+    "link": "https://t.me/Sessions_TW_Bot",
+    "image": "assets/images/twsession.jpg"
   },
   {
-    "title": "API Integration Bot",
-    "description": "Connects Telegram to external services like Google Sheets, Trello, or a custom CRM to automate workflows.",
-    "link": "#",
-    "image": "/assets/images/portfolio-api.jpg"
-  },
-  {
-    "title": "Game & Quiz Bot",
-    "description": "Engages group members with interactive trivia quizzes, leaderboards, and simple text-based games.",
-    "link": "#",
-    "image": "/assets/images/portfolio-game.jpg"
+    "title": "TW Receiver Bot",
+    "description": "A utility bot for securely receiving and managing Telegram account session files, built for developers and power users who need reliability.",
+    "link": "https://t.me/TWFOCUS_BOT",
+    "image": "assets/images/twreceiver.jpg"
   }
-]
+];

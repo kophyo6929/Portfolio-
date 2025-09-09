@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,12 +55,14 @@
     <main>
         <!-- Home Page Content -->
         <section id="page-home" class="page-content hero-section content-section">
-            <div class="hero-content">
-                <h1 class="animate-in" data-text="home.title"></h1>
-                <p class="animate-in" data-text="home.subtitle"></p>
-                <div class="hero-actions animate-in">
-                    <a href="#" data-page="services" class="btn btn-primary" data-text="home.cta"></a>
-                    <a href="#" data-page="faq" class="btn" data-text="home.cta_faq"></a>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="animate-in" data-text="home.title"></h1>
+                    <p class="animate-in" data-text="home.subtitle"></p>
+                    <div class="hero-actions animate-in">
+                        <a href="#" data-page="services" class="btn btn-primary" data-text="home.cta"></a>
+                        <a href="#" data-page="faq" class="btn" data-text="home.cta_faq"></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -164,10 +167,33 @@
                  </div>
             </div>
         </section>
+
+        <!-- Privacy Policy Page Content -->
+        <section id="page-privacy" class="page-content content-section">
+            <div class="container animate-in">
+                <h2 data-text="privacy_page.title"></h2>
+                <p data-text="privacy_page.content"></p>
+            </div>
+        </section>
+
+        <!-- Terms of Service Page Content -->
+        <section id="page-terms" class="page-content content-section">
+            <div class="container animate-in">
+                <h2 data-text="terms_page.title"></h2>
+                <p data-text="terms_page.content"></p>
+            </div>
+        </section>
     </main>
     
     <footer class="main-footer-bottom">
-        <p data-text="footer.copyright"></p>
+        <div class="footer-content">
+            <p data-text="footer.copyright"></p>
+            <nav class="footer-legal-links">
+                <a href="#" data-page="privacy" data-text="footer.privacy_policy"></a>
+                <span>|</span>
+                <a href="#" data-page="terms" data-text="footer.terms_of_service"></a>
+            </nav>
+        </div>
     </footer>
 
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">

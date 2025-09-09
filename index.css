@@ -1,4 +1,5 @@
 
+
 :root {
     --bg-color: #E0E5EC;
     --text-color: #555e67;
@@ -45,6 +46,10 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+main {
+    padding-top: 5.5rem; /* Pushes content below fixed header, increased for mobile */
+}
+
 /* --- Typography --- */
 h1, h2, h3, h4 {
     color: var(--heading-color);
@@ -87,7 +92,7 @@ a {
 
 .content-section, .page-content {
     padding: 6rem 0;
-    min-height: calc(100vh - 120px); /* Adjust for header/footer */
+    min-height: calc(100vh - 120px - 4.5rem); /* Adjust for header/footer and main padding */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -138,6 +143,13 @@ html[data-theme="dark"] .main-header {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--heading-color);
+    line-height: 1.1;
+}
+
+.logo .logo-subtitle {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-color);
 }
 
 .nav-links {
@@ -251,7 +263,6 @@ html[data-theme="dark"] .main-header {
 /* --- Hero Section --- */
 .hero-section {
     text-align: center;
-    min-height: 100vh;
 }
 
 .hero-content {
@@ -262,6 +273,51 @@ html[data-theme="dark"] .main-header {
     font-size: 1.25rem;
     margin-bottom: 2rem;
 }
+
+.hero-highlights {
+    list-style: none;
+    padding: 0;
+    margin-top: 3rem;
+    text-align: left;
+    display: inline-block;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-highlights li {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    position: relative;
+    padding-left: 35px;
+    line-height: 1.5;
+}
+
+.hero-highlights li small {
+    display: inline-block;
+    margin-top: 0.25rem;
+    opacity: 0.85;
+    font-weight: 300;
+    font-size: 0.95rem;
+}
+
+
+.hero-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 22px;
+    height: 22px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    background-size: 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 
 .hero-actions {
     display: flex;
@@ -779,8 +835,36 @@ html[data-theme="dark"] .faq-nav-btn:hover {
 /* --- Footer --- */
 .main-footer-bottom {
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 1rem;
     font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-legal-links a {
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+.footer-legal-links a:hover {
+    text-decoration: none;
+}
+
+.footer-legal-links span {
+    color: var(--text-color);
+    opacity: 0.6;
 }
 
 /* --- Theme Toggle Switch --- */

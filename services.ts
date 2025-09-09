@@ -12,7 +12,7 @@ export default [
       "User authentication and management"
     ],
     "bot_link": null,
-    "image": "/assets/images/service-building.jpg"
+    "image": "assets/images/service-building.jpg"
   },
   {
     "id": "renting",
@@ -27,7 +27,7 @@ export default [
       "Affordable monthly subscription plans"
     ],
     "bot_link": null,
-    "image": "/assets/images/service-renting.jpg"
+    "image": "assets/images/service-renting.jpg"
   },
   {
     "id": "hosting",
@@ -42,7 +42,7 @@ export default [
       "Technical support included"
     ],
     "bot_link": null,
-    "image": "/assets/images/service-hosting.jpg"
+    "image": "assets/images/service-hosting.jpg"
   },
   {
     "id": "movie-bot",
@@ -57,7 +57,7 @@ export default [
       "Admin panel for custom bots (Subscription)"
     ],
     "bot_link": "https://t.me/TWMVBOT",
-    "image": "/assets/images/cineverse.jpg"
+    "image": "assets/images/cineverse.jpg"
   },
   {
     "id": "selling-bot",
@@ -72,7 +72,7 @@ export default [
         "Designed for users who value security"
     ],
     "bot_link": "https://t.me/Sessions_TW_Bot",
-    "image": "/assets/images/twsession.jpg"
+    "image": "assets/images/twsession.jpg"
   },
    {
     "id": "receiver-bot",
@@ -87,7 +87,7 @@ export default [
         "Smooth, reliable, built for serious users"
     ],
     "bot_link": "https://t.me/TWFOCUS_BOT",
-    "image": "/assets/images/service-account-receiver.jpg"
+    "image": "assets/images/twreceiver.jpg"
   },
   {
     "id": "isp-store",
@@ -102,7 +102,7 @@ export default [
         "Customizable for any digital product"
     ],
     "bot_link": "https://t.me/AtomPointBot",
-    "image": "/assets/images/atompoint.jpg"
+    "image": "assets/images/atompoint.jpg"
   },
   {
     "id": "language",
@@ -117,6 +117,6 @@ export default [
         "Makes learning Chinese manageable and elegant"
     ],
     "bot_link": "https://t.me/HSK_FOR_BEGINNER_BOT",
-    "image": "/assets/images/hsk.jpg"
+    "image": "assets/images/hsk.jpg"
   }
 ]

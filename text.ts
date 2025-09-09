@@ -1,7 +1,6 @@
-
 export default {
   "header": {
-    "logo": "BotDev Pro",
+    "logo": "THE WAY<br><span class='logo-subtitle'>by TW</span>",
     "nav_home": "Home",
     "nav_about": "About",
     "nav_services": "Services",
@@ -20,14 +19,14 @@ export default {
     ]
   },
   "home": {
-    "title": "Expert Telegram Bot Developer",
-    "subtitle": "Creating powerful, intelligent, and seamless bots to automate your business and engage your audience.",
+    "title": "THE WAY – BUILDING YOUR VISION INTO REALITY",
+    "subtitle": "Design and develop smart, scalable, and high-performance solutions to help businesses grow.<ul class=\"hero-highlights\"><li>Telegram Bot Development <br><small>– custom bots for automation & engagement</small></li><li>Web Development <br><small>– responsive, modern, and scalable websites</small></li><li>Hosting Solutions <br><small>– secure and reliable deployment for your apps</small></li><li>Source Code Sales <br><small>– ready-to-use premium scripts & solutions</small></li></ul>",
     "cta": "Explore Services",
     "cta_faq": "View FAQs",
     "meta": {
-      "title": "Expert Telegram Bot Developer | Custom Automation & API Integration",
-      "description": "Hire a top-rated Telegram bot developer specializing in custom bots for business automation, e-commerce, and API integration. Get a free quote for your project.",
-      "keywords": "Telegram bot developer, custom Telegram bots, hire bot developer, Python aiogram, Node.js Telegraf, bot development services, Telegram automation, API integration"
+      "title": "THE WAY by TW | Custom Bot & Web Development Solutions",
+      "description": "I design and develop smart, scalable, and high-performance solutions including Telegram bots, responsive websites, and secure hosting to help your business grow.",
+      "keywords": "Telegram Bot Development, Web Development, Hosting Solutions, Source Code Sales, custom bots, responsive websites, THE WAY by TW"
     }
   },
   "about_page": {
@@ -91,6 +90,26 @@ export default {
     }
   },
   "footer": {
-    "copyright": "&copy; 2024 BotDev Pro. All Rights Reserved."
+    "copyright": "&copy; 2024 THE WAY by TW. All Rights Reserved.",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_service": "Terms of Service"
+  },
+  "privacy_page": {
+    "title": "Privacy Policy",
+    "content": "Our privacy policy details how we handle your data. Content for this page is coming soon.",
+    "meta": {
+        "title": "Privacy Policy | THE WAY by TW",
+        "description": "Read the privacy policy for THE WAY by TW.",
+        "keywords": "privacy policy, data protection, user privacy"
+    }
+  },
+  "terms_page": {
+    "title": "Terms of Service",
+    "content": "Our terms of service outline the rules and regulations for the use of our services. Content for this page is coming soon.",
+    "meta": {
+        "title": "Terms of Service | THE WAY by TW",
+        "description": "Read the terms of service for THE WAY by TW.",
+        "keywords": "terms of service, terms and conditions, user agreement"
+    }
   }
 }
