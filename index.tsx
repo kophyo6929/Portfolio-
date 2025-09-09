@@ -380,16 +380,17 @@ function displayFaqAnswer(faqIndex: number) {
  * Populates the Contact page links and information.
  */
 function populateContactPage(contactInfo: any) {
-    const links = {
+    const links: { [key: string]: string } = {
         'contact-telegram': contactInfo.telegram,
         'contact-facebook': contactInfo.facebook,
+        'contact-messenger': contactInfo.messenger,
         'contact-youtube': contactInfo.youtube,
         'contact-tiktok': contactInfo.tiktok,
     };
 
     for (const [id, href] of Object.entries(links)) {
         const el = document.getElementById(id) as HTMLAnchorElement;
-        if (el) {
+        if (el && href) {
             el.href = href;
         }
     }
