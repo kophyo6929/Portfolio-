@@ -19,7 +19,7 @@ export default {
     ]
   },
   "home": {
-    "title": "THE WAY – BUILDING YOUR VISION INTO REALITY",
+    "title": "THE WAY – BUILDING<br>YOUR VISION INTO REALITY",
     "subtitle": "Design and develop smart, scalable, and high-performance solutions to help businesses grow.<ul class=\"hero-highlights\"><li>Telegram Bot Development <br><small>– custom bots for automation & engagement</small></li><li>Web Development <br><small>– responsive, modern, and scalable websites</small></li><li>Hosting Solutions <br><small>– secure and reliable deployment for your apps</small></li><li>Source Code Sales <br><small>– ready-to-use premium scripts & solutions</small></li></ul>",
     "cta": "Explore Services",
     "cta_faq": "View FAQs",

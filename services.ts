@@ -2,7 +2,7 @@ export default [
   {
     "id": "building",
     "title": "Bot Building",
-    "price": "Starts at $250",
+    "price": "$50 - $100 (depending on scope)",
     "description": "From concept to deployment, I create bespoke Telegram bots designed to meet your specific business needs. Whether you need a bot for customer service, e-commerce, content delivery, or process automation, I build reliable and scalable solutions.",
     "instructions": "Contact me with your project idea. We'll have a consultation to define the scope, features, and timeline. Once agreed, I'll begin development, providing regular updates until the final bot is delivered and deployed.",
     "features": [
@@ -17,7 +17,7 @@ export default [
   {
     "id": "renting",
     "title": "Bot Rentals",
-    "price": "$50 / month",
+    "price": "$15 - $30 / month",
     "description": "Get immediate access to powerful, ready-to-use bots for a low monthly fee. Ideal for businesses that need a proven solution without the upfront development cost. All rental bots include maintenance and support.",
     "instructions": "Browse my portfolio of available rental bots. Choose the one that fits your needs and contact me to set up your subscription. The bot will be configured for your channel or group within 24 hours.",
     "features": [
@@ -32,7 +32,7 @@ export default [
   {
     "id": "hosting",
     "title": "Bot Hosting",
-    "price": "$15 / month per bot",
+    "price": "$4 - $7 / month (depending on project size)",
     "description": "Ensure your bot is always online and responsive with my managed hosting service. I provide a secure, high-performance environment specifically optimized for Telegram bots, so you can focus on your business, not on server maintenance.",
     "instructions": "Provide me with your bot's source code or token. I will deploy it on a secure, private server and provide you with logs and a control panel to monitor its status. All maintenance and security updates are handled by me.",
     "features": [
