@@ -87,7 +87,7 @@ export default [
         "Smooth, reliable, built for serious users"
     ],
     "bot_link": "https://t.me/TWFOCUS_BOT",
-    "image": "https://t.me/thewaysession/38"
+    "image": "/assets/images/service-account-receiver.jpg"
   },
   {
     "id": "isp-store",
