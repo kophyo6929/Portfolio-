@@ -12,9 +12,11 @@ export default {
       { "name": "Bot Building", "href": "#building" },
       { "name": "Bot Rentals", "href": "#renting" },
       { "name": "Bot Hosting", "href": "#hosting" },
-      { "name": "Account Trading", "href": "#accounts" },
-      { "name": "ISP Store Bots", "href": "#isp-store" },
-      { "name": "Language Bots", "href": "#language" }
+      { "name": "Movie & TV Finder", "href": "#movie-bot" },
+      { "name": "Session Marketplace", "href": "#selling-bot" },
+      { "name": "Account Receiver", "href": "#receiver-bot" },
+      { "name": "Custom Store Bots", "href": "#isp-store" },
+      { "name": "Chinese HSK Learning", "href": "#language" }
     ]
   },
   "home": {
